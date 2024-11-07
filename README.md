@@ -1,5 +1,5 @@
 # banco_quempoupatem_banco_de_dados
-
+```mermaid
 erDiagram
     CLIENTE {
         int id
@@ -29,3 +29,4 @@ erDiagram
     CLIENTE ||--o{ PEDIDO : realiza
     PEDIDO ||--o{ ITEM_PEDIDO : possui
     ITEM_PEDIDO }o--|| PRODUTO : refere-se_a
+```
