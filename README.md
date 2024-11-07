@@ -51,7 +51,7 @@ erDiagram
     time horarioDaOperacao
     }
 
-    GERENTE }| -- || CONTA : gerencia
+    
     CLIENTE || -- || CONTA : utiliza
     CLIENTE || -- |{ DEBITO : realiza
     CLIENTE || -- |{ DEPOSITO : realiza
@@ -63,5 +63,6 @@ erDiagram
     EXTRATO || -- |{ DEBITO : gera_um_registro
     EXTRATO || -- |{ DEPOSITO : gera_um_registro
     EXTRATO || -- |{ TRANSFERENCIA : gera_um_registro
+    GERENTE }| -- || CONTA : gerencia
 
 ```
