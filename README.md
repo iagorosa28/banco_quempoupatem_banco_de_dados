@@ -55,13 +55,13 @@ erDiagram
     CLIENTE || -- || CONTA : utiliza
     CLIENTE || -- |{ DEBITO : realiza
     CLIENTE || -- |{ DEPOSITO : realiza
-    CLIENTE || -- |{ TRANSFERENCIA : faz ou recebe
+    CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe
     CLIENTE || -- |{ EXTRATO : consulta
     CONTA || -- |{ DEBITO : atualiza
     CONTA || -- |{ DEPOSITO : atualiza
     CONTA || -- |{ TRANSFERENCIA : atualiza
-    EXTRATO || -- |{ DEBITO : gera um registro
-    EXTRATO || -- |{ DEPOSITO : gera um registro
-    EXTRATO || -- |{ TRANSFERENCIA : gera um registro
+    EXTRATO || -- |{ DEBITO : gera_um_registro
+    EXTRATO || -- |{ DEPOSITO : gera_um_registro
+    EXTRATO || -- |{ TRANSFERENCIA : gera_um_registro
 
 ```
