@@ -14,41 +14,41 @@ erDiagram
     }
 
     CONTA {
-    string tipo de conta
+    string tipoDeConta
     float valor
     int senha
-    date data de criacao
-    time hora de criacao
+    date dataDeCriacao
+    time horaDeCriacao
     }
 
     DEBITO {
     float valor
     float taxa
-    date data de pagamento
-    time hora de pagamento
+    date dataDePagamento
+    time horaDePagamento
     }
 
     DEPOSITO {
     float valor
-    date data de recebimento
-    time hora de recebimento
+    date dataDeRecebimento
+    time horaDeRecebimento
     }
 
     TRANSFERENCIA {
     float taxa
     float valor
-    date data de pagamento
-    time hora de pagamento
-    date data de recebimento
-    time hora de recebimento
+    date dataDePagamento
+    time horaDePagamento
+    date dataDeRecebimento
+    time horaDeRecebimento
     }
 
     EXTRATO {
     float taxa
     float valor
-    string tipo da operacao 
-    date data da operacao
-    time horario da operacao
+    string tipoDaOperacao 
+    date dataDaOperacao
+    time horarioDaOperacao
     }
 
     GERENTE }| -- || CONTA : gerencia
