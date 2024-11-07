@@ -2,50 +2,66 @@
 ```mermaid
 erDiagram
     CLIENTE {
-        int id
-        string nome
-        string email
-        string telefone
-    }
-    
-    PEDIDO {
-        int id
-        date data_pedido
-        float total
-    }
-    
-    PRODUTO {
-        int id
-        string nome
-        float preco
-        int quantidade_estoque
+    string nome
+    int CPF
+    int idade
     }
 
-    ITEM_PEDIDO {
-        int quantidade
-        float preco_unitario
+    GERENTE {
+    string nome
+    string login
+    int senha
     }
 
-    CLIENTE ||--o{ PEDIDO : realiza
-    PEDIDO ||--o{ ITEM_PEDIDO : possui
-    ITEM_PEDIDO }o--|| PRODUTO : refere-se_a
-```
-```mermaid
-erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    CUSTOMER {
-        string name
-        string custNumber
-        string sector
+    CONTA {
+    string tipo de conta
+    float valor
+    int senha
+    date data de criação
+    time hora de criação
     }
-    ORDER ||--|{ LINE-ITEM : contains
-    ORDER {
-        int orderNumber
-        string deliveryAddress
+
+    DÉBITO {
+    float valor
+    float taxa
+    date data de pagamento
+    time hora de pagamento
     }
-    LINE-ITEM {
-        string productCode
-        int quantity
-        float pricePerUnit
+
+    DEPÓSITO {
+    float valor
+    date data de recebimento
+    time hora de recebimento
     }
+
+    TRANSFERÊNCIA {
+    float taxa
+    float valor
+    date data de pagamento
+    time hora de pagamento
+    date data de recebimento
+    time hora de recebimento
+    }
+
+    EXTRATO {
+    float taxa
+    float valor
+    string tipo da operação 
+    date data da operação
+    time horário da operação
+    }
+
+    GERENTE }| -- || CONTA : gerencia
+    CLIENTE || -- || CONTA : utiliza
+    CLIENTE || -- |{ DÉBITO : realiza
+    CLIENTE || -- |{ DEPÓSITO : realiza
+    CLIENTE || -- |{ TRANSFERÊNCIA : faz ou recebe
+    CLIENTE || -- |{ EXTRATO : consulta
+    CONTA || -- |{ DÉBITO : atualiza
+    CONTA || -- |{ DEPÓSITO : atualiza
+    CONTA || -- |{ TRANSFERÊNCIA : atualiza
+    EXTRATO || -- |{ DÉBITO : gera um registro
+    EXTRATO || -- |{ DEPÓSITO : gera um registro
+    EXTRATO || -- |{ TRANSFERÊNCIA : gera um registro
+
 ```
