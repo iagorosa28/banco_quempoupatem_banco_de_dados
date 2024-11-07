@@ -48,7 +48,7 @@ erDiagram
     float valor
     string tipo da operacao 
     date data da operacao
-    time horário da operacao
+    time horario da operacao
     }
 
     GERENTE }| -- || CONTA : gerencia
