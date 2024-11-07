@@ -51,7 +51,6 @@ erDiagram
     time horarioDaOperacao
     }
 
-    
     CLIENTE || -- || CONTA : utiliza
     CLIENTE || -- |{ DEBITO : realiza
     CLIENTE || -- |{ DEPOSITO : realiza
