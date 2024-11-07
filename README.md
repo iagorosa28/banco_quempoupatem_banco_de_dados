@@ -107,7 +107,7 @@ classDiagram
     DÉBITO : + date data de pagamento
     DÉBITO : + time hora de pagamento
 
-    class DEEPÓSITO
+    class DEPÓSITO
     DEPÓSITO : + float valor
     DEPÓSITO : + date data de recebimento
     DEPÓSITO : + time hora de recebimento
