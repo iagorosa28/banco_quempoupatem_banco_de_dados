@@ -17,8 +17,8 @@ erDiagram
     string tipo de conta
     float valor
     int senha
-    date data de criação
-    time hora de criação
+    date data de criacão
+    time hora de criacão
     }
 
     DÉBITO {
