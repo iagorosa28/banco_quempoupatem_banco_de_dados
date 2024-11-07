@@ -21,20 +21,20 @@ erDiagram
     time hora de criacao
     }
 
-    DÉBITO {
+    DEBITO {
     float valor
     float taxa
     date data de pagamento
     time hora de pagamento
     }
 
-    DEPÓSITO {
+    DEPOSITO {
     float valor
     date data de recebimento
     time hora de recebimento
     }
 
-    TRANSFERÊNCIA {
+    TRANSFERENCIA {
     float taxa
     float valor
     date data de pagamento
@@ -46,22 +46,22 @@ erDiagram
     EXTRATO {
     float taxa
     float valor
-    string tipo da operação 
-    date data da operação
-    time horário da operação
+    string tipo da operacao 
+    date data da operacao
+    time horário da operacao
     }
 
     GERENTE }| -- || CONTA : gerencia
     CLIENTE || -- || CONTA : utiliza
-    CLIENTE || -- |{ DÉBITO : realiza
-    CLIENTE || -- |{ DEPÓSITO : realiza
-    CLIENTE || -- |{ TRANSFERÊNCIA : faz ou recebe
+    CLIENTE || -- |{ DEBITO : realiza
+    CLIENTE || -- |{ DEPOSITO : realiza
+    CLIENTE || -- |{ TRANSFERENCIA : faz ou recebe
     CLIENTE || -- |{ EXTRATO : consulta
-    CONTA || -- |{ DÉBITO : atualiza
-    CONTA || -- |{ DEPÓSITO : atualiza
-    CONTA || -- |{ TRANSFERÊNCIA : atualiza
-    EXTRATO || -- |{ DÉBITO : gera um registro
-    EXTRATO || -- |{ DEPÓSITO : gera um registro
-    EXTRATO || -- |{ TRANSFERÊNCIA : gera um registro
+    CONTA || -- |{ DEBITO : atualiza
+    CONTA || -- |{ DEPOSITO : atualiza
+    CONTA || -- |{ TRANSFERENCIA : atualiza
+    EXTRATO || -- |{ DEBITO : gera um registro
+    EXTRATO || -- |{ DEPOSITO : gera um registro
+    EXTRATO || -- |{ TRANSFERENCIA : gera um registro
 
 ```
