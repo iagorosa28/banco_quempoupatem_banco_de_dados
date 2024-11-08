@@ -150,3 +150,8 @@ classDiagram
 Iago Rosa de Oliveira R.A.: 22.224.027-7
 
 Mariah Santos Gomes R.A.: 22.224.026-8
+
+### Anotações
+- Extrato join de todos
+- Colocar as datas para todos
+- 
