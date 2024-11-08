@@ -154,4 +154,5 @@ Mariah Santos Gomes R.A.: 22.224.026-8
 ### Anotações
 - Extrato join de todos
 - Colocar as datas para todos
-- 
+- Programar direto com banco de dados
+- Usar supabase 
