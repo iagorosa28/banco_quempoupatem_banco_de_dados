@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from supabase import create_client, Client
-from menu import print_menu
+from printsMenu import prints_menu
 
 # Carrega as variáveis de ambiente
 load_dotenv()
@@ -16,7 +16,7 @@ print()
 print("Bem-vindo(a) ao Banco QuemPoupaTem!!!")
 while(True):
     print()
-    print_menu()
+    prints_menu()
     opcao = int(input("Digite uma opção: "))
     if opcao == 1:
         print("Gerente!")
