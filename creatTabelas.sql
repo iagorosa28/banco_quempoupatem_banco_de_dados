@@ -15,10 +15,10 @@ CREATE TABLE gerente (
 );
 
 CREATE TABLE conta (  
+  id_cliente INT NOT NULL REFERENCES cliente(id),
   tipo VARCHAR NOT NULL,
   saldo FLOAT NOT NULL,
   senha VARCHAR NOT NULL,
-  id_cliente INT NOT NULL REFERENCES cliente(id),
   id_gerente INT NOT NULL REFERENCES gerente(id),
-  PRIMARY KEY (id_cliente, id_gerente) 
+  PRIMARY KEY (id_cliente) 
 );
