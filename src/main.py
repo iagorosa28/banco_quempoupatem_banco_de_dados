@@ -1,27 +1,31 @@
 import os
 from dotenv import load_dotenv
 from supabase import create_client, Client
-from printsMenu import prints_menu
+from gerente import menu_inicial_g
+from cliente import login_c
 
-# Carrega as variáveis de ambiente
+# Carrega as variáveis de ambiente:
 load_dotenv()
 supabase_url = os.getenv("SUPABASE_URL")
 supabase_key = os.getenv("SUPABASE_KEY")
 
-# Cria a conexão com o Supabase
+# Cria a conexão com o Supabase:
 supabase: Client = create_client(supabase_url, supabase_key)
 
-# Loop principal
+# Loop principal:
 print()
 print("Bem-vindo(a) ao Banco QuemPoupaTem!!!")
 while(True):
     print()
-    prints_menu()
+    print("Menu: ")
+    print("1. Gerente")
+    print("2. Cliente")
+    print("3. Sair")
     opcao = int(input("Digite uma opção: "))
     if opcao == 1:
-        print("Gerente!")
+        menu_inicial_g()
     elif opcao == 2:
-        print("Cliente!")
+        login_c()
     elif opcao == 3:
         print("Tchau!")
         break

@@ -1,11 +1,14 @@
-from printsMenuInicialG import prints_menu_inicial_g
-
+# Loop inicial dos gerentes (antes deles "logarem"):
 def menu_inicial_g():
     print()
     print("Menu Inicial Gerente")
     while(True):
         print()
-        prints_menu_inicial_g()
+        print("Menu: ")
+        print("1. Cadastrar")
+        print("2. Logar")
+        print("3. Excluir")
+        print("4. Sair")
         opcao = int(input("Digite uma opção: "))
         if opcao == 1:
             print("Cadastrar!")
