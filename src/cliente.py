@@ -1,3 +1,5 @@
+from config_supabase import supabase
+
 # Login do cliente:
 def login_c():
     print()
