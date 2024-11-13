@@ -11,10 +11,11 @@ def login_c():
 # Menu cliente:
 def menu_c():
     print()
-    print("Menu Cliente")
+    print("Área Cliente")
     while(True):
         print()
-        print("Menu: ")
+        print("---------------")
+        print("Menu Cliente: ")
         print("1. Consultar Saldo")
         print("2. Débito")
         print("3. Depósito")
@@ -22,6 +23,7 @@ def menu_c():
         print("5. Extrato")
         print("6. Investimentos")
         print("7. Sair")
+        print("---------------")
         opcao = int(input("Digite uma opção: "))
         if opcao == 1:
             print("Saldo!")
