@@ -7,10 +7,12 @@ print()
 print("Bem-vindo(a) ao Banco QuemPoupaTem!!!")
 while(True):
     print()
-    print("Menu: ")
+    print("Menu de Acesso Banco: ")
+    print("---------------")
     print("1. Gerente")
     print("2. Cliente")
     print("3. Sair")
+    print("---------------")
     opcao = int(input("Digite uma opção: "))
     if opcao == 1:
         menu_inicial_g()

@@ -3,14 +3,16 @@ from config_supabase import supabase
 # Loop inicial dos gerentes (antes deles "logarem"):
 def menu_inicial_g():
     print()
-    print("Menu Inicial Gerente")
+    print("Área de Acesso Gerente")
     while(True):
         print()
-        print("Menu: ")
+        print("Menu de Acesso Gerente: ")
+        print("---------------")
         print("1. Cadastrar")
         print("2. Logar")
         print("3. Excluir")
         print("4. Sair")
+        print("---------------")
         opcao = int(input("Digite uma opção: "))
         if opcao == 1:
             cadastrar_g()
@@ -38,6 +40,7 @@ def consultar_login(login):
 
 # Cadastrar gerente:
 def cadastrar_g():
+    print()
     chave_acesso = int(input("Digite a chave de acesso do banco: "))
     if chave_acesso == n_acesso:
         nome = input("Insira o nome: ")
