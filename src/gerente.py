@@ -45,10 +45,10 @@ def cadastrar_g():
     if chave_acesso == n_acesso:
         nome = input("Insira o nome: ")
         login = input("Insira um login: ")
-        consulta = consultar_login
+        consulta = consultar_login(login)
         while consulta:
             login = input("Login já existente! digitar outro login: ")
-            consulta = consultar_login
+            consulta = consultar_login(login)
         senha = input("Insira uma senha: ")
         dados = {
             "nome": nome,
