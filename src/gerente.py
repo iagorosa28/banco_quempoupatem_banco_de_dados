@@ -69,15 +69,29 @@ def cadastrar_g():
 # Login do gerente:
 def login_g():
     print()
-    # implementar login aqui (Mariah).
+    login = input("Insira um login: ")
+    verificacaoLogin = consultar_login(login)
+    while True:
+        if verificacaoLogin == False:
+            login = input("Login Incorreto! Digite novamente: ")
+            verificacaoLogin = consultar_login(login)
+        else:
+            break
+        
+    senha = input("Insira uma senha: ")
+    verificacaoSenha = supabase.table("gerente").select("senha").eq("login", login).execute()
+    conferindoSenha = verificacaoSenha.data[0]["senha"]
+    while True:
+        if senha != conferindoSenha:
+            senha = input('Senha Incorreta! Digite novamente: ')
+            verificacaoSenha = supabase.table("gerente").select("senha").eq("login", login).execute()
+        else:
+            break
+
     print("Login Gerente")
-    # se o login for concluído -> então chamar a função menu_g.
-    # tem que guardar o id do gerente que está logando e passar como parâmetro na função menu gerente.
-    # exemplo mais ou menos de como você tem que fazer: 
-    login = "iagorosa28"
     resultado = supabase.table("gerente").select("id").eq("login", login).execute()
     id_gerente = resultado.data[0]["id"]  # Obtém o ID do gerente.
-    menu_g(id_gerente)  # Chama o menu do gerente com o ID.
+    menu_g(id_gerente)  # Chama o menu do gerente com o ID.    
 
 # Excluir gerente:
 def excluir_g():
@@ -182,8 +196,12 @@ def criar_conta_c(id_gerente):
 # Excluir conta cliente:
 def excluir_conta_c():
     print()
-    # implementar excluir conta cliente aqui (Mariah).
-    print("Excluir Conta Cliente")
+    cpf = input("Digite o CPF: ")
+    if consultar_cpf(cpf):
+        resultado = supabase.table("cliente").delete().eq("cpf", cpf).execute()
+        print("Cliente excluido com sucesso!")
+    else:
+        print("Não existe esse cliente!")
 
 # Consultar contas clientes:
 def consultar_contas_c():
