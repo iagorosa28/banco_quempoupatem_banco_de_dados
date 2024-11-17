@@ -69,8 +69,8 @@ def cadastrar_g():
 # Login do gerente:
 def login_g():
     print()
-    print("Login Gerente")
     # implementar login aqui (Mariah).
+    print("Login Gerente")
     # se o login for concluído -> então chamar a função menu_g.
     # tem que guardar o id do gerente que está logando e passar como parâmetro na função menu gerente.
     # exemplo mais ou menos de como você tem que fazer: 
@@ -178,3 +178,15 @@ def criar_conta_c(id_gerente):
                     print("Erro ao cadastrar conta: ", resultado_conta.error)    
             else:
                 print("Erro ao cadastrar cliente: ", resultado_cliente.error)
+
+# Excluir conta cliente:
+def excluir_conta_c():
+    print()
+    # implementar excluir conta cliente aqui (Mariah).
+    print("Excluir Conta Cliente")
+
+# Consultar contas clientes:
+def consultar_contas_c():
+    print()
+    # implementar consultar contas clientes aqui (Mariah).
+    print("Consultar contas clientes")
