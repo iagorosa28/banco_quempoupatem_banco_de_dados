@@ -127,11 +127,11 @@ def menu_g(id_gerente):
         if opcao == 1:
             criar_conta_c(id_gerente)
         elif opcao == 2:
-            print("Excluir Conta Cliente")
+            excluir_conta_c()
         elif opcao == 3:
             print("Consultar Contas Cliente")
         elif opcao == 4:
-            print("Cadastrar Empresa")
+            cadastrar_e()
         elif opcao == 5:
             print("Tchau!")
             break
@@ -209,7 +209,31 @@ def consultar_contas_c():
     # implementar consultar contas clientes aqui (Mariah).
     print("Consultar contas clientes")
 
+# Verifica se o CNPJ que foi digitado bate com algum CNPJ na tabela empresa:
+def consultar_cnpj(cnpj):
+    resultado = supabase.table("empresa").select("cnpj").eq("cnpj", cnpj).execute()
+    if resultado.data:
+        return True
+    else:
+        return False
+
 # Cadastrar empresa:
 def cadastrar_e():
     print()
-    # implementar cadastrar empresa aqui (Iago).
+    cnpj = input("Digite O CNPJ: ")
+    if consultar_cnpj(cnpj):
+        print("Já existe uma empresa com esse CNPJ!")
+    else:
+        nome = input("Digite o nome: ")
+        valor_cota = float(input("Digite o valor da cota: "))
+        dados_empresa = {
+            "nome": nome,
+            "cnpj": cnpj,
+            "valor_cota": valor_cota
+        }
+        # Enviar dados da empresa para o banco de dados:
+        resultado_empresa = supabase.table("empresa").insert(dados_empresa).execute()
+        if resultado_empresa.data:
+            print("Empresa cadastrada com sucesso!")
+        else:
+            print("Erro ao cadastrar empresa: ", resultado_empresa.error)
