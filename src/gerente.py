@@ -19,7 +19,7 @@ def menu_acesso_g():
         elif opcao == 2:
             print("Logar!")
         elif opcao == 3:
-            print("Excluir!")
+            excluir_g()
         elif opcao == 4:
             print("Tchau!")
             break
@@ -66,6 +66,7 @@ def cadastrar_g():
     else:
         print("Chave de acesso incorreta!")
 
+# Login do gerente:
 def login_g():
     print()
     print("Login Gerente")
@@ -73,7 +74,20 @@ def login_g():
     # se o login for concluído -> então chamar a função menu_g.
     menu_g()
 
-# Aqui excluir_g (Iago)
+# Excluir gerente:
+def excluir_g():
+    print()
+    chave_acesso = int(input("Digite a chave de acesso do banco: "))
+    if chave_acesso == n_acesso:
+        login = input("Insira o login do gerente que deseja excluir: ")
+        consulta = consultar_login(login)
+        if consulta:
+            resultado = supabase.table("gerente").delete().eq("login", login).execute()
+            print("Gerente excluido com sucesso!")
+        else:
+            print("Login inexistente!")
+    else:
+        print("Chave de acesso incorreta!")
 
 # Menu gerente:
 def menu_g():
