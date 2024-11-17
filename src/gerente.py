@@ -129,7 +129,7 @@ def menu_g(id_gerente):
         elif opcao == 2:
             excluir_conta_c()
         elif opcao == 3:
-            print("Consultar Contas Cliente")
+            consultar_contas_c()
         elif opcao == 4:
             cadastrar_e()
         elif opcao == 5:
@@ -206,8 +206,17 @@ def excluir_conta_c():
 # Consultar contas clientes:
 def consultar_contas_c():
     print()
-    # implementar consultar contas clientes aqui (Mariah).
-    print("Consultar contas clientes")
+    verificacao = supabase.table("cliente").select("id").execute()
+    if verificacao.data:
+        resultadoCliente = supabase.table("cliente").select("*").execute()
+        for cliente in resultadoCliente.data:
+            print(f"Nome: {cliente['nome']}")
+            print(f"CPF: {cliente['cpf']}")
+            print(f"Idade: {cliente['idade']}")
+            print("-" * 15)  # Separador entre os registros
+    else:
+        # Quando não tem cliente cadastrado
+        print("O banco não possui clientes")  
 
 # Verifica se o CNPJ que foi digitado bate com algum CNPJ na tabela empresa:
 def consultar_cnpj(cnpj):
