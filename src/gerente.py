@@ -190,3 +190,8 @@ def consultar_contas_c():
     print()
     # implementar consultar contas clientes aqui (Mariah).
     print("Consultar contas clientes")
+
+# Cadastrar empresa:
+def cadastrar_e():
+    print()
+    # implementar cadastrar empresa aqui (Iago).
