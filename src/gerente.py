@@ -48,7 +48,7 @@ def cadastrar_g():
         login = input("Insira um login: ")
         consulta = consultar_login(login)
         while consulta:
-            login = input("Login já existente! Digitar outro login: ")
+            login = input("Login já existente! digitar outro login: ")
             consulta = consultar_login(login)
         senha = input("Insira uma senha: ")
         dados = {
@@ -93,7 +93,6 @@ def login_g():
     resultado = supabase.table("gerente").select("id").eq("login", login).execute()
     id_gerente = resultado.data[0]["id"]  # Obtém o ID do gerente.
     menu_g(id_gerente)  # Chama o menu do gerente com o ID.    
-    
 
 # Excluir gerente:
 def excluir_g():
@@ -133,7 +132,7 @@ def menu_g(id_gerente):
         elif opcao == 3:
             consultar_contas_c()
         elif opcao == 4:
-            print("Cadastrar Empresa")
+            cadastrar_e()
         elif opcao == 5:
             print("Tchau!")
             break
@@ -219,4 +218,34 @@ def consultar_contas_c():
             print("-" * 15)  # Separador entre os registros
     else:
         # Quando não tem cliente cadastrado
-        print("O banco não possui clientes")   
+        print("O banco não possui clientes")  
+
+# Verifica se o CNPJ que foi digitado bate com algum CNPJ na tabela empresa:
+def consultar_cnpj(cnpj):
+    resultado = supabase.table("empresa").select("cnpj").eq("cnpj", cnpj).execute()
+    if resultado.data:
+        return True
+    else:
+        return False
+
+# Cadastrar empresa:
+def cadastrar_e():
+    print()
+    cnpj = input("Digite O CNPJ: ")
+    if consultar_cnpj(cnpj):
+        print("Já existe uma empresa com esse CNPJ!")
+    else:
+        nome = input("Digite o nome: ")
+        valor_cota = float(input("Digite o valor da cota: "))
+        dados_empresa = {
+            "nome": nome,
+            "cnpj": cnpj,
+            "valor_cota": valor_cota
+        }
+        # Enviar dados da empresa para o banco de dados:
+        resultado_empresa = supabase.table("empresa").insert(dados_empresa).execute()
+        if resultado_empresa.data:
+            print("Empresa cadastrada com sucesso!")
+        else:
+            print("Erro ao cadastrar empresa: ", resultado_empresa.error)
+
