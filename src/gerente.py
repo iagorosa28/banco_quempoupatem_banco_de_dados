@@ -203,7 +203,7 @@ def excluir_conta_c():
         resultado = supabase.table("cliente").delete().eq("cpf", cpf).execute()
         print("Cliente excluido com sucesso!")
     else:
-        print("Já existe uma conta com esse CPF!")
+        print("Não existe esse cliente!")
 
 # Consultar contas clientes:
 def consultar_contas_c():
