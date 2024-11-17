@@ -1,4 +1,5 @@
 from config_supabase import supabase
+from pprint import pprint
 
 # Loop inicial dos gerentes (antes deles "logarem"):
 def menu_acesso_g():
@@ -69,7 +70,6 @@ def cadastrar_g():
 # Login do gerente:
 def login_g():
     print()
-    # implementar login aqui (Mariah).
     login = input("Insira um login: ")
     verificacaoLogin = consultar_login(login)
     while True:
@@ -131,7 +131,7 @@ def menu_g(id_gerente):
         elif opcao == 2:
             excluir_conta_c()
         elif opcao == 3:
-            print("Consultar Contas Cliente")
+            consultar_contas_c()
         elif opcao == 4:
             print("Cadastrar Empresa")
         elif opcao == 5:
@@ -206,7 +206,17 @@ def excluir_conta_c():
         print("Não existe esse cliente!")
 
 # Consultar contas clientes:
+# Acrescentar outras informações do cliente
 def consultar_contas_c():
     print()
-    # implementar consultar contas clientes aqui (Mariah).
-    print("Consultar contas clientes")
+    verificacao = supabase.table("cliente").select("id").execute()
+    if verificacao.data:
+        resultadoCliente = supabase.table("cliente").select("*").execute()
+        for cliente in resultadoCliente.data:
+            print(f"Nome: {cliente['nome']}")
+            print(f"CPF: {cliente['cpf']}")
+            print(f"Idade: {cliente['idade']}")
+            print("-" * 15)  # Separador entre os registros
+    else:
+        # Quando não tem cliente cadastrado
+        print("O banco não possui clientes")   
