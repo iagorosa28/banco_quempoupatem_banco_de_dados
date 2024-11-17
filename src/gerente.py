@@ -1,7 +1,7 @@
 from config_supabase import supabase
 
 # Loop inicial dos gerentes (antes deles "logarem"):
-def menu_inicial_g():
+def menu_acesso_g():
     print()
     print("Área de Acesso Gerente")
     while(True):
@@ -65,3 +65,41 @@ def cadastrar_g():
             print("Erro ao cadastrar gerente: ", resultado.error)
     else:
         print("Chave de acesso incorreta!")
+
+def login_g():
+    print()
+    print("Login Gerente")
+    # implementar login aqui (Mariah).
+    # se o login for concluído -> então chamar a função menu_g.
+    menu_g()
+
+# Aqui excluir_g (Iago)
+
+# Menu gerente:
+def menu_g():
+    print()
+    print("Área Gerente")
+    while(True):
+        print()
+        print("---------------")
+        print("Menu Gerente: ")
+        print("1. Criar Conta Cliente")
+        print("2. Excluir Conta Cliente")
+        print("3. Consultar Contas Clientes")
+        print("4. Cadastrar Empresa")
+        print("5. Sair")
+        print("---------------")
+        opcao = int(input("Digite uma opção: "))
+        if opcao == 1:
+            print("Criar Conta Cliente")
+        elif opcao == 2:
+            print("Excluir Conta Cliente")
+        elif opcao == 3:
+            print("Consultar Contas Cliente")
+        elif opcao == 4:
+            print("Cadastrar Empresa")
+        elif opcao == 5:
+            print("Tchau!")
+            break
+        else:
+            print("Opção inválida!")
