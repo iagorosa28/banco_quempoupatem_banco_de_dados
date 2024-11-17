@@ -3,8 +3,8 @@ from config_supabase import supabase
 # Login do cliente:
 def login_c():
     print()
-    print("Login Cliente")
     # implementar login aqui (Mariah).
+    print("Login Cliente")
     # se o login for concluído -> então chamar a função menu_c.
     menu_c()
 
@@ -26,19 +26,55 @@ def menu_c():
         print("---------------")
         opcao = int(input("Digite uma opção: "))
         if opcao == 1:
-            print("Saldo!")
+            consultar_saldo()
         elif opcao == 2:
-            print("Débito!")
+            debito()
         elif opcao == 3:
-            print("Depósito!")
+            deposito()
         elif opcao == 4:
-            print("Transferência!")
+            transferencia()
         elif opcao == 5:
-            print("Extrato!")
+            extrato()
         elif opcao == 6:
-            print("Investimento!")
+            investimentos()
         elif opcao == 7:
             print("Tchau!")
             break
         else:
             print("Opção inválida!")
+
+# Consultar saldo:
+def consultar_saldo():
+    print()
+    # Implementar aqui (Mariah).
+    print("Consultar Saldo")
+
+# Débito:
+def debito():
+    print()
+    # Implementar aqui (Iago).
+    print("Débito")
+
+# Depósito:
+def deposito():
+    print()
+    # Implementar aqui (Iago).
+    print("Depósito")
+
+# Transferência:
+def transferencia():
+    print()
+    # Implementar aqui (Iago).
+    print("Transferência")
+
+# Extrato:
+def extrato():
+    print()
+    # Implementar aqui (Mariah).
+    print("Extrato")
+
+# Investimentos:
+def investimentos():
+    print()
+    # Implementar aqui (Iago).
+    print("Investimentos")
