@@ -1,5 +1,5 @@
 from config_supabase import supabase
-from gerente import menu_inicial_g
+from gerente import menu_acesso_g
 from cliente import login_c
 
 # Loop principal:
@@ -15,7 +15,7 @@ while(True):
     print("---------------")
     opcao = int(input("Digite uma opção: "))
     if opcao == 1:
-        menu_inicial_g()
+        menu_acesso_g()
     elif opcao == 2:
         login_c()
     elif opcao == 3:
