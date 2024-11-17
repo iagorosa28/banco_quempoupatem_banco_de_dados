@@ -129,7 +129,7 @@ def menu_g(id_gerente):
         if opcao == 1:
             criar_conta_c(id_gerente)
         elif opcao == 2:
-            print("Excluir Conta Cliente")
+            excluir_conta_c()
         elif opcao == 3:
             print("Consultar Contas Cliente")
         elif opcao == 4:
@@ -198,8 +198,12 @@ def criar_conta_c(id_gerente):
 # Excluir conta cliente:
 def excluir_conta_c():
     print()
-    # implementar excluir conta cliente aqui (Mariah).
-    print("Excluir Conta Cliente")
+    cpf = input("Digite o CPF: ")
+    if consultar_cpf(cpf):
+        resultado = supabase.table("cliente").delete().eq("cpf", cpf).execute()
+        print("Cliente excluido com sucesso!")
+    else:
+        print("Já existe uma conta com esse CPF!")
 
 # Consultar contas clientes:
 def consultar_contas_c():
