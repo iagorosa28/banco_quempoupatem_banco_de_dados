@@ -29,8 +29,8 @@ def login_c():
             break
 
     resultado = supabase.table("cliente").select("id").eq("cpf", cpf).execute()
-    id_cliente = resultado.data[0]["id"]  # Obtém o ID do gerente.
-    # Chama o menu do gerente com o ID.    
+    id_cliente = resultado.data[0]["id"]  # Obtém o cliente do gerente.
+    # Chama o menu do cliente com o ID.    
     menu_c(id_cliente)
 
 # Verifica se o CPF que foi digitado bate com algum CPF na tabela cliente:
@@ -59,11 +59,11 @@ def menu_c(id_cliente):
         print("---------------")
         opcao = int(input("Digite uma opção: "))
         if opcao == 1:
-            consultar_saldo()
+            consultar_saldo(id_cliente)
         elif opcao == 2:
-            debito()
+            debito(id_cliente)
         elif opcao == 3:
-            deposito()
+            deposito(id_cliente)
         elif opcao == 4:
             transferencia()
         elif opcao == 5:
@@ -77,31 +77,78 @@ def menu_c(id_cliente):
             print("Opção inválida!")
 
 # Consultar saldo:
-def consultar_saldo():
+def consultar_saldo(id_cliente):
     print()
-    # Implementar aqui (Mariah).
-    print("Consultar Saldo")
+    resultadoConta = supabase.table("conta").select("saldo").eq("id_cliente", id_cliente).execute()
+    conta = resultadoConta.data[0]  # Pegando a primeira conta
+    print(f"Saldo: {conta['saldo']}")
 
+# Realizando cálculos de débito:
 def debitando(id_cliente, valor):
-    dados = {
+    resultado_conta = supabase.table("conta").select("tipo", "saldo").eq("id_cliente", id_cliente).execute()
+    tipo_conta = resultado_conta.data[0]["tipo"]
+    saldo = float(resultado_conta.data[0]["saldo"])
+    
+    taxa = 0
+    if tipo_conta == "normal":
+        taxa = 0.05
+    elif tipo_conta == "plus":
+        taxa = 0.03
+
+    valor_taxa = valor * taxa
+    valor_final = valor + valor_taxa
+    saldo_final = saldo - valor_final
+
+    dados_debito = {
         "valor": valor,
-        "taxa": taxa,
+        "taxa": valor_taxa,
         "data": data,
         "hora": hora,
         "id_cliente": id_cliente
     }
+    resultado_saldo_final = supabase.table("conta").update({"saldo": saldo_final}).eq("id_cliente", id_cliente).execute()
+    resultado_debito = supabase.table("debito").insert(dados_debito).execute()
+    
+    return bool(resultado_debito.data and resultado_saldo_final.data)
 
 # Débito:
-def debito():
+def debito(id_cliente):
     print()
-    # Implementar aqui (Iago).
-    print("Débito")
+    valor = float(input("Digite o valor do débito: "))
+    resultado = debitando(id_cliente, valor)
+    if resultado:
+        print("Débito realizado com sucesso!")
+    else:
+        print("Erro ao realizar o débito!")
+
+
+# Realizando cálculos de depósito:
+def depositando(id_cliente, valor):
+    resultado_saldo = supabase.table("conta").select("saldo").eq("id_cliente", id_cliente).execute()
+    saldo = float(resultado_saldo.data[0]["saldo"])
+
+    saldo_final = saldo + valor
+
+    dados_deposito = {
+        "valor": valor,
+        "data": data,
+        "hora": hora,
+        "id_cliente": id_cliente
+    }
+    resultado_saldo_final = supabase.table("conta").update({"saldo": saldo_final}).eq("id_cliente", id_cliente).execute()
+    resultado_deposito = supabase.table("deposito").insert(dados_deposito).execute()
+    
+    return bool(resultado_deposito.data and resultado_saldo_final.data)
 
 # Depósito:
-def deposito():
+def deposito(id_cliente):
     print()
-    # Implementar aqui (Iago).
-    print("Depósito")
+    valor = float(input("Digite o valor do depósito: "))
+    resultado = depositando(id_cliente, valor)
+    if resultado:
+        print("Depósito realizado com sucesso!")
+    else:
+        print("Erro ao realizar o depósito!")
 
 # Transferência:
 def transferencia():
