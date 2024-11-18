@@ -1,4 +1,8 @@
 from config_supabase import supabase
+from datetime import datetime
+
+data = datetime.now().strftime("%Y-%m-%d")
+hora = datetime.now().strftime("%H:%M:%S")
 
 # Login do cliente:
 def login_c():
@@ -77,6 +81,15 @@ def consultar_saldo():
     print()
     # Implementar aqui (Mariah).
     print("Consultar Saldo")
+
+def debitando(id_cliente, valor):
+    dados = {
+        "valor": valor,
+        "taxa": taxa,
+        "data": data,
+        "hora": hora,
+        "id_cliente": id_cliente
+    }
 
 # Débito:
 def debito():
