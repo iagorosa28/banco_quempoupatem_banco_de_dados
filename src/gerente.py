@@ -207,13 +207,36 @@ def excluir_conta_c():
 def consultar_contas_c():
     print()
     verificacao = supabase.table("cliente").select("id").execute()
+    
     if verificacao.data:
-        resultadoCliente = supabase.table("cliente").select("*").execute()
-        for cliente in resultadoCliente.data:
-            print(f"Nome: {cliente['nome']}")
-            print(f"CPF: {cliente['cpf']}")
-            print(f"Idade: {cliente['idade']}")
-            print("-" * 15)  # Separador entre os registros
+        cont = 0 
+        
+        resultado = supabase.table("cliente").select("id").execute()
+        idS = [cliente["id"] for cliente in resultado.data]
+        
+        # Quantidade de pessoas
+        while cont < len(idS):
+            id_cliente = idS[cont]  # ID do cliente atual
+
+            # Consulta dos dados do cliente com base no ID
+            cliente = supabase.table("cliente").select("*").eq("id", id_cliente).execute()
+
+            # Consulta da conta do cliente com base no ID
+            conta = supabase.table("conta").select("*").eq("id_cliente", id_cliente).execute()
+        
+            if cliente.data and conta.data:
+                cliente_info = cliente.data[0]  # Dados do cliente
+                conta_info = conta.data[0]  # Dados da conta
+
+                print(f"Nome: {cliente_info['nome']}")
+                print(f"CPF: {cliente_info['cpf']}")
+                print(f"Idade: {cliente_info['idade']}")
+                print(f"Tipo de conta: {conta_info['tipo']}")
+                print(f"Saldo: {conta_info['saldo']}")
+                print("-" * 15)  # Separador entre os registros
+                
+            # Incrementa o contador para a próxima iteração
+            cont += 1
     else:
         # Quando não tem cliente cadastrado
         print("O banco não possui clientes")  
