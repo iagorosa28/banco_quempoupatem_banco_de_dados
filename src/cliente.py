@@ -3,13 +3,42 @@ from config_supabase import supabase
 # Login do cliente:
 def login_c():
     print()
-    # implementar login aqui (Mariah).
-    print("Login Cliente")
-    # se o login for concluído -> então chamar a função menu_c.
-    menu_c()
+    cpf = input("Insira seu CPF: ")
+    verificacaoCPF = consultar_cpf(cpf)
+    while True:
+        if verificacaoCPF == False:
+            cpf = input("CPF incorreto! Digite novamente: ")
+            verificacaoCPF = consultar_cpf(cpf)
+        else:
+            resultado = supabase.table("cliente").select("id").eq("cpf", cpf).execute()
+            id_cliente = resultado.data[0]["id"]  # Obtém o ID do gerente.
+            break
+        
+    senha = input("Insira uma senha: ")
+    verificacaoSenha = supabase.table("conta").select("senha").eq("id_cliente", id_cliente).execute()
+    conferindoSenha = verificacaoSenha.data[0]["senha"]
+    while True:
+        if senha != conferindoSenha:
+            senha = input('Senha Incorreta! Digite novamente: ')
+            verificacaoSenha = supabase.table("conta").select("senha").eq("id_cliente", id_cliente).execute()
+        else:
+            break
+
+    resultado = supabase.table("cliente").select("id").eq("cpf", cpf).execute()
+    id_cliente = resultado.data[0]["id"]  # Obtém o ID do gerente.
+    # Chama o menu do gerente com o ID.    
+    menu_c(id_cliente)
+
+# Verifica se o CPF que foi digitado bate com algum CPF na tabela cliente:
+def consultar_cpf(cpf):
+    resultado = supabase.table("cliente").select("cpf").eq("cpf", cpf).execute()
+    if resultado.data:
+        return True
+    else:
+        return False
 
 # Menu cliente:
-def menu_c():
+def menu_c(id_cliente):
     print()
     print("Área Cliente")
     while(True):
