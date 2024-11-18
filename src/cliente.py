@@ -25,8 +25,8 @@ def login_c():
             break
 
     resultado = supabase.table("cliente").select("id").eq("cpf", cpf).execute()
-    id_cliente = resultado.data[0]["id"]  # Obtém o ID do gerente.
-    # Chama o menu do gerente com o ID.    
+    id_cliente = resultado.data[0]["id"]  # Obtém o cliente do gerente.
+    # Chama o menu do cliente com o ID.    
     menu_c(id_cliente)
 
 # Verifica se o CPF que foi digitado bate com algum CPF na tabela cliente:
@@ -55,7 +55,7 @@ def menu_c(id_cliente):
         print("---------------")
         opcao = int(input("Digite uma opção: "))
         if opcao == 1:
-            consultar_saldo()
+            consultar_saldo(id_cliente)
         elif opcao == 2:
             debito()
         elif opcao == 3:
@@ -73,10 +73,11 @@ def menu_c(id_cliente):
             print("Opção inválida!")
 
 # Consultar saldo:
-def consultar_saldo():
+def consultar_saldo(id_cliente):
     print()
-    # Implementar aqui (Mariah).
-    print("Consultar Saldo")
+    resultadoConta = supabase.table("conta").select("saldo").eq("id_cliente", id_cliente).execute()
+    conta = resultadoConta.data[0]  # Pegando a primeira conta
+    print(f"Saldo: {conta['saldo']}")
 
 # Débito:
 def debito():
