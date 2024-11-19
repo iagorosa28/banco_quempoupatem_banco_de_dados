@@ -213,8 +213,12 @@ def registra_extrato(data, hora, tipo_operacao, sinal, valor, taxa, id_cliente):
 # Extrato:
 def extrato(id_cliente):
     print()
-    # Implementar aqui (Mariah).
-    print("Extrato")
+    dados = supabase.table("extrato").select("*").eq("id_cliente", id_cliente).execute()
+    for extrato in dados.data:
+        print("-" * 15)  # Separador entre os registros
+        print(f"Data: {extrato['data']}, Horário: {extrato['hora']}, Tipo: {extrato['tipo_operacao']}, "
+              f"Valor: {extrato['sinal']} R$ {float(extrato['valor']):.2f}, Taxa: {float(extrato['taxa']):.2f}")
+    print("-" * 15)  # Separador entre os registros
 
 # Investimentos:
 def investimentos(id_cliente):
