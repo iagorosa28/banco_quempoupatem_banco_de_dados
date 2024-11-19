@@ -172,7 +172,8 @@ classDiagram
 </div>
 <br>
 
-**3º PASSO:** No primeiro acesso, é necessário cadastrar um gerente, pois o banco de dados ainda não possui clientes cadastrados. Para isso, selecione a opção "Cadastrar". Caso já exista um gerente cadastrado, este passo pode ser ignorado, e você pode realizar o login diretamente.  
+**3º PASSO:** No primeiro acesso, é necessário cadastrar um gerente, pois o banco de dados ainda não possui clientes cadastrados. Para isso, selecione a opção "Cadastrar". Caso já exista um gerente cadastrado, este passo pode ser ignorado, e você pode realizar o login diretamente.
+
 ***IMPORTANTE:*** Para algumas operações, como cadastrar ou excluir um gerente no banco de dados, será necessário inserir a senha **15072023**.
 
 <div align="center">
