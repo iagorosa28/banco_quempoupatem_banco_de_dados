@@ -45,6 +45,7 @@ erDiagram
     }
 
     TRANSFERENCIA {
+
     }
 
     EXTRATO {
