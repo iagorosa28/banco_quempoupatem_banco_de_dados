@@ -80,32 +80,34 @@ erDiagram
 ```mermaid
 classDiagram
     class CLIENTE
+    CLIENTE : + int id
     CLIENTE : + string nome
     CLIENTE : + int CPF
     CLIENTE : + int idade
 
     class GERENTE
+    GERENTE : + int id
     GERENTE : + string nome
     GERENTE : + string login
-    GERENTE : + int senha
+    GERENTE : + string senha
 
     class CONTA
-    CONTA : + string tipo de conta
-    CONTA : + float valor
-    CONTA : + int senha
-    CONTA : + date data de criação
-    CONTA : + time hora de criação
+    CONTA : + int cliente_id
+    CONTA : + string tipo
+    CONTA : + float saldo
+    CONTA : + string senha
+    CONTA : + int gerente_id
 
-    class DÉBITO
-    DÉBITO : + float valor
-    DÉBITO : + float taxa
-    DÉBITO : + date data de pagamento
-    DÉBITO : + time hora de pagamento
+    class DEBITO
+    DEBITO : + int id
+    DEBITO : + float valor
+    DEBITO : + float taxa
+    DEBITO : + int cliente_id
 
-    class DEPÓSITO
-    DEPÓSITO : + float valor
-    DEPÓSITO : + date data de recebimento
-    DEPÓSITO : + time hora de recebimento
+    class DEPOSITO
+    DEPOSITO : + int id
+    DEPOSITO : + float valor
+    DEPOSITO : + int cliente_id
 
     class TRANSFERÊNCIA
     TRANSFERÊNCIA : + float taxa
@@ -116,24 +118,44 @@ classDiagram
     TRANSFERÊNCIA : + time hora de recebimento
 
     class EXTRATO
+    ENTRATO : + int id
+    EXTRATO : + date data 
+    EXTRATO : + time horario
+    EXTRATO : + string tipo_operação
+    EXTRATO : + string sinal
     EXTRATO : + float taxa
     EXTRATO : + float valor
-    EXTRATO : + string tipo da operação
-    EXTRATO : + date data da operação
-    EXTRATO : + time horario da operação
+    EXTRATO : + int cliente_id
+    
+    class EMPRESA
+    EMPRESA : + int id
+    EMPRESA : + string nome
+    EMPRESA : + string CNPJ
+    EMPRESA : + float valor_cota
+
+    class INVESTIMENTO
+    INVESTIMENTO : int cliente_id
+    INVESTIMENTO : int empresa_id
+    INVESTIMENTO : int quantidade
 
     CLIENTE "1" --> "1" CONTA : utiliza
-    CLIENTE "1" --> "1..*" DÉBITO : realiza
-    CLIENTE "1" --> "1..*" DEPÓSITO : realiza
-    CLIENTE "1" --> "1..*" TRANSFERÊNCIA : faz_ou_recebe
+    GERENTE "1..*" --> "1..*" CONTA : gerencia
+    CLIENTE "1" --> "1..*" DEBITO : realiza
+    CLIENTE "1" --> "1..*" DEPOSITO : realiza
+    DEBITO "1" --> "1" TRANSFERENCIA : nsei
+    DEPOSITO "1" --> "1" TRANSFERENCIA : nsei
     CLIENTE "1" --> "1..*" EXTRATO : consulta
-    CONTA "1" --> "1..*" DÉBITO : atualiza
-    CONTA "1" --> "1..*" DEPÓSITO : atualiza
-    CONTA "1" --> "1..*" TRANSFERÊNCIA : atualiza
-    EXTRATO "1" --> "1..*" DÉBITO : gera_um_registro
-    EXTRATO "1" --> "1..*" DEPÓSITO : gera_um_registro
-    EXTRATO "1" --> "1..*" TRANSFERÊNCIA : gera_um_registro
-    GERENTE "1..*" --> "1" CONTA : gerencia
+    CLIENTE "1..*" --> "1..*" EMPRESA : nsei
+    
+    %%CLIENTE "1" --> "1..*" TRANSFERÊNCIA : faz_ou_recebe
+    
+    %%CONTA "1" --> "1..*" DÉBITO : atualiza
+    %%CONTA "1" --> "1..*" DEPÓSITO : atualiza
+    %%CONTA "1" --> "1..*" TRANSFERÊNCIA : atualiza
+    %%EXTRATO "1" --> "1..*" DÉBITO : gera_um_registro
+    %%EXTRATO "1" --> "1..*" DEPÓSITO : gera_um_registro
+    %%EXTRATO "1" --> "1..*" TRANSFERÊNCIA : gera_um_registro
+    
 ```
 ## :space_invader: Como executar o código
 
