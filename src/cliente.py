@@ -105,9 +105,11 @@ def debitando(id_cliente, valor):
         "id_cliente": id_cliente
     }
     resultado_saldo_final = supabase.table("conta").update({"saldo": saldo_final}).eq("id_cliente", id_cliente).execute()
-    resultado_debito = supabase.table("debito").insert(dados_debito).execute()
-    
-    return bool(resultado_debito.data and resultado_saldo_final.data)
+    if resultado_saldo_final.data:
+        resultado_debito = supabase.table("debito").insert(dados_debito).execute()
+        if resultado_debito.data:
+            return resultado_debito.data[0].get("id")
+    return None
 
 # Débito:
 def debito(id_cliente):
@@ -132,9 +134,11 @@ def depositando(id_cliente, valor):
         "id_cliente": id_cliente
     }
     resultado_saldo_final = supabase.table("conta").update({"saldo": saldo_final}).eq("id_cliente", id_cliente).execute()
-    resultado_deposito = supabase.table("deposito").insert(dados_deposito).execute()
-    
-    return bool(resultado_deposito.data and resultado_saldo_final.data)
+    if resultado_saldo_final.data:
+        resultado_deposito = supabase.table("deposito").insert(dados_deposito).execute()
+        if resultado_deposito.data:
+            return resultado_deposito.data[0].get("id")
+    return None
 
 # Depósito:
 def deposito(id_cliente):
