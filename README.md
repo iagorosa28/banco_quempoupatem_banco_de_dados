@@ -75,17 +75,6 @@ erDiagram
     CLIENTE  || -- |{ EXTRATO : gera 
     CLIENTE  || -- o{ INVESTIMENTO : realiza
     EMPRESA || -- o{ INVESTIMENTO : recebe
-
-
- %% CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe   
-   %% CONTA || -- |{ DEBITO : atualiza
-   %% CONTA || -- |{ DEPOSITO : atualiza
-   %% CONTA || -- |{ TRANSFERENCIA : atualiza
-   %% EXTRATO || -- |{ DEBITO : gera_um_registro
-    %% EXTRATO || -- |{ DEPOSITO : gera_um_registro
-   %% EXTRATO || -- |{ TRANSFERENCIA : gera_um_registro
-    
-
 ```
 ### Modelo Relacional na 3FN
 ```mermaid
