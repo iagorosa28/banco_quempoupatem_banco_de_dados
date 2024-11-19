@@ -52,11 +52,11 @@ erDiagram
     %%int cliente_id
     }
 
-    %%TRANSFERENCIA {
+    TRANSFERENCIA {
     %%int id
     %%int debito_id
     %%int deposito_id
-    %%}
+    }
 
     EXTRATO {
     %%int id
@@ -90,9 +90,10 @@ erDiagram
     %%DEPOSITO || -- || TRANSFERENCIA : nsei 
     CLIENTE  || -- |{ EXTRATO : gera
     CLIENTE  }| -- |{ EMPRESA : investe 
+    CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe
 
   %%  CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe
-   %% CLIENTE || -- |{ EXTRATO : consulta
+   
    %% CONTA || -- |{ DEBITO : atualiza
    %% CONTA || -- |{ DEPOSITO : atualiza
    %% CONTA || -- |{ TRANSFERENCIA : atualiza
