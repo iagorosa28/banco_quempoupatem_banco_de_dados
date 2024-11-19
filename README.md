@@ -203,7 +203,7 @@ classDiagram
 <br>
 
 ### Realizando Querys
-**1ºPASSO:** Selecione o arquivo `query.sql` e selecione query por query rode no Supabase. As querys estão numeradas e cada uma do lado do número tem para que ela serve.
+**1ºPASSO:** Selecione o arquivo `query.sql` e execute query por query no Supabase. As queries estão numeradas, e ao lado do número há a descrição do que cada uma faz.
 
 ## :busts_in_silhouette: Desenvolvedores
 | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/e6827fd1-d8fe-4740-b6fc-fbbfccd05752" width=115><br><sub>Mariah Santos Gomes</sub>](https://github.com/Mariah-Gomes) | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/66d7e656-b9e4-43b7-94fa-931b736df881" width=115><br><sub>Iago Rosa de Oliveira</sub>](https://github.com/iagorosa28) |
