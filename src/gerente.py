@@ -123,7 +123,8 @@ def menu_g(id_gerente):
         print("2. Excluir Conta Cliente")
         print("3. Consultar Contas Clientes")
         print("4. Cadastrar Empresa")
-        print("5. Sair")
+        print("5. Excluir Empresa")
+        print("6. Sair")
         print("---------------")
         opcao = int(input("Digite uma opção: "))
         if opcao == 1:
@@ -135,6 +136,8 @@ def menu_g(id_gerente):
         elif opcao == 4:
             cadastrar_e()
         elif opcao == 5:
+            excluir_e()
+        elif opcao == 6:
             print("Tchau!")
             break
         else:
@@ -274,3 +277,13 @@ def cadastrar_e():
             print("Empresa cadastrada com sucesso!")
         else:
             print("Erro ao cadastrar empresa: ", resultado_empresa.error)
+
+# Excluir empresa:
+def excluir_e():
+    print()
+    cnpj = input("Digite o CNPJ: ")
+    if consultar_cnpj(cnpj):
+        resultado = supabase.table("empresa").delete().eq("cnpj", cnpj).execute()
+        print("Empresa excluida com sucesso!")
+    else:
+        print("Não existe essa empresa!")
