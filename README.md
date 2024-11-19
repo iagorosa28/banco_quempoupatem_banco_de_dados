@@ -157,7 +157,18 @@ classDiagram
 **4º PASSO:** Execute o arquivo `main.py`. Assim, o código será iniciado e estará pronto para realizar as operações.
 
 ### Rodando o Banco
-**1ºPASSO:** 
+
+**1ºPASSO:** Ao rodar o arquivo `main.py` deverá aparecer no seu terminal a mensagem da foto abaixo. Logo, que ela aparecer você deverá escolher uma opção.
+
+<div align="center">
+   <img width=400 height=250 src="https://github.com/user-attachments/assets/f0e9646f-71f6-4fdf-9f23-5df7a716d98c"/>
+</div>
+
+**2ºPASSO:**
+
+## Realizando Querys
+
+
 
 ## :busts_in_silhouette: Desenvolvedores
 | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/e6827fd1-d8fe-4740-b6fc-fbbfccd05752" width=115><br><sub>Mariah Santos Gomes</sub>](https://github.com/Mariah-Gomes) | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/66d7e656-b9e4-43b7-94fa-931b736df881" width=115><br><sub>Iago Rosa de Oliveira</sub>](https://github.com/iagorosa28) |
