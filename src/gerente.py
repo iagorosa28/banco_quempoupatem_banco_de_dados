@@ -124,7 +124,8 @@ def menu_g(id_gerente):
         print("3. Consultar Contas Clientes")
         print("4. Cadastrar Empresa")
         print("5. Excluir Empresa")
-        print("6. Sair")
+        print("6. Consultar Empresa")
+        print("7. Sair")
         print("---------------")
         opcao = int(input("Digite uma opção: "))
         if opcao == 1:
@@ -138,6 +139,8 @@ def menu_g(id_gerente):
         elif opcao == 5:
             excluir_e()
         elif opcao == 6:
+            consultar_e()
+        elif opcao == 7:
             print("Tchau!")
             break
         else:
@@ -287,3 +290,35 @@ def excluir_e():
         print("Empresa excluida com sucesso!")
     else:
         print("Não existe essa empresa!")
+
+# Consultar empresa (roubando o código da Mariah kkkk):
+def consultar_e():
+    print
+    verificacao = supabase.table("empresa").select("id").execute()
+    
+    if verificacao.data:
+        cont = 0 
+        
+        resultado = supabase.table("empresa").select("id").execute()
+        idS = [empresa["id"] for empresa in resultado.data]
+        
+        # Quantidade de empresas
+        while cont < len(idS):
+            id_empresa = idS[cont]  # ID da empresa atual
+
+            # Consulta dos dados da empresa com base no ID
+            empresa = supabase.table("empresa").select("*").eq("id", id_empresa).execute()
+        
+            if empresa.data:
+                empresa_info = empresa.data[0]  # Dados da empresa
+
+                print(f"Nome: {empresa_info['nome']}")
+                print(f"CNPJ: {empresa_info['cnpj']}")
+                print(f"Valor cota: {empresa_info['valor_cota']}")
+                print("-" * 15)  # Separador entre os registros
+                
+            # Incrementa o contador para a próxima iteração
+            cont += 1
+    else:
+        # Quando não tem empresa cadastrada
+        print("O banco não possui empresas")  
