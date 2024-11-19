@@ -161,7 +161,7 @@ classDiagram
 **1º PASSO:** Ao rodar o arquivo `main.py`, deverá aparecer no terminal a mensagem exibida na imagem abaixo. Assim que ela aparecer, escolha uma das opções.
 
 <div align="center">
-   <img width=600 height=350 src="https://github.com/user-attachments/assets/f0e9646f-71f6-4fdf-9f23-5df7a716d98c"/>
+   <img src="https://github.com/user-attachments/assets/f0e9646f-71f6-4fdf-9f23-5df7a716d98c"/>
 </div>
 
 **2º PASSO:** É recomendado que, inicialmente, selecione a opção "Gerente", pois apenas o gerente pode criar contas. Após criar uma conta, o cliente poderá acessar e realizar as operações. Portanto, primeiro selecione a opção "Gerente". O menu seguinte será exibido:
