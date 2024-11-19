@@ -161,12 +161,36 @@ classDiagram
 **1ºPASSO:** Ao rodar o arquivo `main.py` deverá aparecer no seu terminal a mensagem da foto abaixo. Logo, que ela aparecer você deverá escolher uma opção.
 
 <div align="center">
-   <img width=200 height=150 src="https://github.com/user-attachments/assets/f0e9646f-71f6-4fdf-9f23-5df7a716d98c"/>
+   <img width=400 height=250 src="https://github.com/user-attachments/assets/f0e9646f-71f6-4fdf-9f23-5df7a716d98c"/>
 </div>
 
-**2ºPASSO:**
+**2ºPASSO:** É recomendamento que primeiro selecione a opção "Gerente", porque, a única pessoa que consegue criar contas é o Gerente e apartir de uma conta criada o cliente consegue acessar e fazer as operações. Portanto, primeiro selecionamos a opção "Gerente" e aparece o seguinte menu:
 
-## Realizando Querys
+<div align="center">
+   <img width=400 height=250 src="https://github.com/user-attachments/assets/e8553b29-e4f8-4c4f-843c-b664859277cc"/>
+</div>
+
+**3ºPASSO:** No primeiro acesso precisa cadastrar um gerente, porque seu banco de dados ainda não possui nenhum cliente cadastrado. Portanto, selecionamos a opção cadastrar, mas quando já possuimos um gerente cadastrado não precisamos realizar esse passo e podemos logar direto. ***DETALHE IMPORTANTE:* Ao fazer algumas operações como cadastrar ou excluir gerente do banco de dados do banco precisamos inserir uma senha que é *15072023*** 
+
+<div align="center">
+   <img width=400 height=250 src="https://github.com/user-attachments/assets/a629e141-a3e3-4872-8a7d-033abe30b458"/>
+</div>
+
+**4ºPASSO:** Depois de cadastrar um gerente, podemos logar o gerente e logo em seguida aparecerá um menu das operações que ele pode realizar no banco. Como havia dito antes só o gerente pode cadastrar contas, antes de selecionarmos a operação no menu principal cliente é necessário ter um cliente cadastrado por um gerente no banco de dados do banco.
+
+<div align="center">
+   <img width=400 height=250 src="https://github.com/user-attachments/assets/432ff0fa-f190-4685-9f0c-a7598588a716"/>
+</div>
+
+**5ºPASSO:** Com uma conta criada, podemos selecionar a opção do menu cliente. Lembrando que essa conta criada já está salva no banco de dados, portanto, se fechar e abrir o programa não será necessário cadastrar ela de novo 
+
+<div align="center">
+   <img width=400 height=250 src="https://github.com/user-attachments/assets/896d3f15-b779-4018-b794-43202d1d6dd7"/>
+</div>
+
+**6ºPASSO:** 
+
+### Realizando Querys
 
 
 
