@@ -111,6 +111,9 @@ classDiagram
     DEPOSITO : + int cliente_id
 
     class TRANSFERENCIA
+    TRANSFERENCIA : + int id
+    TRANSFERENCIA : + int id_debito
+    TRANSFERENCIA : + int id_deposito
 
     class EXTRATO
     EXTRATO : + int id
@@ -136,11 +139,12 @@ classDiagram
     CLIENTE "1" --> "1" CONTA : utiliza
     GERENTE "1..*" --> "1..*" CONTA : gerencia
     CLIENTE "1" --> "1..*" DEBITO : realiza
-    CLIENTE "1" --> "1..*" DEPOSITO : realiza
-    DEBITO "1" --> "1" TRANSFERENCIA : nsei
-    DEPOSITO "1" --> "1" TRANSFERENCIA : nsei
+    CLIENTE "1" --> "1..*" DEPOSITO : realiza_ou_reccebe
+    DEBITO "1" --> "1" TRANSFERENCIA : realiza
+    DEPOSITO "1" --> "1" TRANSFERENCIA : recebe
     CLIENTE "1" --> "1..*" EXTRATO : consulta
-    CLIENTE "1..*" --> "1..*" EMPRESA : nsei
+    CLIENTE "1..*" --> "1..*" INVESTIMENTO : realiza
+    INVESTIMENTO "1..*" --> "1..*" EMPRESA : recebe
     
     %%CLIENTE "1" --> "1..*" TRANSFERÊNCIA : faz_ou_recebe
     
