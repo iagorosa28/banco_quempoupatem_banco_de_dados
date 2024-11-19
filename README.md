@@ -85,7 +85,7 @@ erDiagram
     CLIENTE  || -- || CONTA : utiliza
     GERENTE  || -- |{ CONTA : gerencia
     CLIENTE  || -- |{ DEBITO : realiza
-    CLIENTE  || -- |{ DEPOSITO : realiza/recebe
+    CLIENTE  || -- |{ DEPOSITO : realiza_ou_recebe
     DEBITO   || -- || TRANSFERENCIA : realiza
     DEPOSITO || -- || TRANSFERENCIA : reccebe
     CLIENTE  || -- |{ EXTRATO : gera
