@@ -91,7 +91,8 @@ erDiagram
     CLIENTE  || -- |{ EXTRATO : gera
     %%CLIENTE  }| -- |{ EMPRESA : investe 
     CLIENTE  || -- o{ INVESTIMENTO : realiza
-    EMPRESA || -- o{ INVESTIMENTO : recebe
+    INVESTIMENTO }o -- || EMPRESA : recebe
+    %%EMPRESA || -- o{ INVESTIMENTO : recebe
 
 
  %% CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe   
