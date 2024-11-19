@@ -164,12 +164,14 @@ classDiagram
    <img src="https://github.com/user-attachments/assets/f0e9646f-71f6-4fdf-9f23-5df7a716d98c"/>
 </div>
 <br>
+
 **2º PASSO:** É recomendado que, inicialmente, selecione a opção "Gerente", pois apenas o gerente pode criar contas. Após criar uma conta, o cliente poderá acessar e realizar as operações. Portanto, primeiro selecione a opção "Gerente". O menu seguinte será exibido:
 
 <div align="center">
    <img src="https://github.com/user-attachments/assets/e8553b29-e4f8-4c4f-843c-b664859277cc"/>
 </div>
 <br>
+
 **3º PASSO:** No primeiro acesso, é necessário cadastrar um gerente, pois o banco de dados ainda não possui clientes cadastrados. Para isso, selecione a opção "Cadastrar". Caso já exista um gerente cadastrado, este passo pode ser ignorado, e você pode realizar o login diretamente.  
 ***IMPORTANTE:*** Para algumas operações, como cadastrar ou excluir um gerente no banco de dados, será necessário inserir a senha **15072023**.
 
@@ -177,24 +179,28 @@ classDiagram
    <img src="https://github.com/user-attachments/assets/a629e141-a3e3-4872-8a7d-033abe30b458"/>
 </div>
 <br>
+
 **4º PASSO:** Após cadastrar um gerente, faça login. Em seguida, será exibido o menu com as operações que o gerente pode realizar no banco. Lembre-se: apenas o gerente pode cadastrar contas. Antes de acessar a opção "Cliente" no menu principal, é necessário que o gerente tenha cadastrado um cliente no banco de dados.
 
 <div align="center">
    <img src="https://github.com/user-attachments/assets/432ff0fa-f190-4685-9f0c-a7598588a716"/>
 </div>
 <br>
+
 **5º PASSO:** Com uma conta criada, é possível acessar a opção "Cliente" no menu principal. A conta criada já estará salva no banco de dados, então, mesmo que o programa seja fechado e reaberto, não será necessário cadastrá-la novamente.
 
 <div align="center">
    <img src="https://github.com/user-attachments/assets/896d3f15-b779-4018-b794-43202d1d6dd7"/>
 </div>
 <br>
+
 **6º PASSO:** Ao retornar ao menu principal (saindo e escolhendo a opção "Cliente"), o sistema solicitará os dados do cliente cadastrados por um gerente. Se os dados estiverem corretos, o cliente poderá acessar o menu de operações da sua conta. Após o login, não será necessário inserir CPF e senha novamente para realizar outras operações.
 
 <div align="center">
    <img src="https://github.com/user-attachments/assets/df037694-d3f8-4953-b8ad-80ef23090010"/>
 </div>
 <br>
+
 ### Realizando Querys
 
 
