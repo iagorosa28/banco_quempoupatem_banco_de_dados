@@ -143,8 +143,8 @@ classDiagram
     DEBITO "1" --> "1" TRANSFERENCIA : realiza
     DEPOSITO "1" --> "1" TRANSFERENCIA : recebe
     CLIENTE "1" --> "1..*" EXTRATO : consulta
-    CLIENTE "1..*" --> "1..*" INVESTIMENTO : realiza
-    INVESTIMENTO "1..*" --> "1..*" EMPRESA : recebe
+    CLIENTE "1..*" --> "0..*" INVESTIMENTO : realiza
+    INVESTIMENTO "0..*" --> "1..*" EMPRESA : recebe
     
     %%CLIENTE "1" --> "1..*" TRANSFERÊNCIA : faz_ou_recebe
     
