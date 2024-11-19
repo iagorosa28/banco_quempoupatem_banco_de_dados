@@ -18,23 +18,25 @@
 ```mermaid
 erDiagram
     CLIENTE {
+    id int
     string nome
-    int CPF
+    string CPF
     int idade
     }
 
     GERENTE {
+    int id 
     string nome
     string login
-    int senha
+    string senha
     }
 
     CONTA {
-    string tipoDeConta
-    float valor
-    int senha
-    date dataDeCriacao
-    time horaDeCriacao
+    int cliente_id
+    string tipo
+    float saldo
+    string senha
+    int gerente_id
     }
 
     DEBITO {
