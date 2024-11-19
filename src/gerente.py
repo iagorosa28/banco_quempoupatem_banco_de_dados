@@ -312,6 +312,8 @@ def consultar_e():
             if empresa.data:
                 empresa_info = empresa.data[0]  # Dados da empresa
 
+                print()
+                print("-" * 15)  # Separador entre os registros
                 print(f"Nome: {empresa_info['nome']}")
                 print(f"CNPJ: {empresa_info['cnpj']}")
                 print(f"Valor cota: {empresa_info['valor_cota']}")

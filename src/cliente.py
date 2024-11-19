@@ -220,8 +220,109 @@ def extrato(id_cliente):
               f"Valor: {extrato['sinal']} R$ {float(extrato['valor']):.2f}, Taxa: {float(extrato['taxa']):.2f}")
     print("-" * 15)  # Separador entre os registros
 
-# Investimentos:
+# Menu investimentos:
 def investimentos(id_cliente):
     print()
-    # Implementar aqui (Iago).
-    print("Investimentos")
+    print("Área Investimentos")
+    while(True):
+        print()
+        print("---------------")
+        print("Menu Investimentos: ")
+        print("1. Listar Empresas")
+        print("2. Comprar Cotas")
+        print("3. Vender Cotas")
+        print("4. Meus Investimentos")
+        print("5. Sair")
+        print("---------------")
+        opcao = int(input("Digite uma opção: "))
+        if opcao == 1:
+            listar_e()
+        elif opcao == 2:
+            comprar_cotas(id_cliente)
+        elif opcao == 3:
+            print("FODA-SE")
+        elif opcao == 4:
+            print("FODA-SE")
+        elif opcao == 5:
+            print("Tchau!")
+            break
+        else:
+            print("Opção inválida!")
+
+# Listar empresas (como não consegui importar do gerente eu colei aqui tbm):
+def listar_e():
+    print
+    verificacao = supabase.table("empresa").select("id").execute()
+    
+    if verificacao.data:
+        cont = 0 
+        
+        resultado = supabase.table("empresa").select("id").execute()
+        idS = [empresa["id"] for empresa in resultado.data]
+        
+        # Quantidade de empresas
+        while cont < len(idS):
+            id_empresa = idS[cont]  # ID da empresa atual
+
+            # Consulta dos dados da empresa com base no ID
+            empresa = supabase.table("empresa").select("*").eq("id", id_empresa).execute()
+        
+            if empresa.data:
+                empresa_info = empresa.data[0]  # Dados da empresa
+
+                print()
+                print("-" * 15)  # Separador entre os registros
+                print(f"Nome: {empresa_info['nome']}")
+                print(f"CNPJ: {empresa_info['cnpj']}")
+                print(f"Valor cota: {empresa_info['valor_cota']}")
+                print("-" * 15)  # Separador entre os registros
+                
+            # Incrementa o contador para a próxima iteração
+            cont += 1
+    else:
+        # Quando não tem empresa cadastrada
+        print("O banco não possui empresas")  
+
+# Realizando cálculos para comprar cotas:
+def investindo(id_cliente, id_empresa, qtde):
+    resultado_conta = supabase.table("conta").select("saldo").eq("id_cliente", id_cliente).execute()
+    resultado_empresa = supabase.table("empresa").select("valor_cota").eq("id", id_empresa).execute()
+    saldo = float(resultado_conta.data[0]["saldo"])
+    valor_cota = float(resultado_empresa.data[0]["valor_cota"])
+
+    valor_compra = qtde * valor_cota
+    saldo_final = saldo - valor_compra
+    valor_cota_final = valor_cota + (0.01*qtde)
+
+    resultado_saldo_final = supabase.table("conta").update({"saldo": saldo_final}).eq("id_cliente", id_cliente).execute()
+    if resultado_saldo_final.data:
+        resultado_valor_cota = supabase.table("empresa").update({"valor_cota": valor_cota_final}).eq("id", id_empresa).execute()
+        if resultado_valor_cota.data:
+            dados_investimento = {
+                "id_cliente": id_cliente,
+                "id_empresa": id_empresa,
+                "quantidade": qtde
+            }
+            resultado_investimento = supabase.table("investimento").insert(dados_investimento).execute()
+            if resultado_investimento.data:
+                return valor_compra
+    return None
+
+# Comprar cotas:
+def comprar_cotas(id_cliente):
+    print()
+    cnpj_empresa = input("Digite o CNPJ da empresa: ")
+    resultado_cnpj = supabase.table("empresa").select("id").eq("cnpj", cnpj_empresa).execute()
+    if resultado_cnpj.data:
+        id_empresa = int(resultado_cnpj.data[0]["id"])
+        qtde = int(input("Digite a quantidade de cotas que deseja comprar: "))
+        valor_investimento = investindo(id_cliente, id_empresa, qtde)
+        if valor_investimento:
+            data = datetime.now().strftime("%Y-%m-%d")
+            hora = datetime.now().strftime("%H:%M:%S")
+            registra_extrato(data, hora, "compra de cota(s)", "-", valor_investimento, 0, id_cliente)
+            print("Investimento realizado com sucesso!")
+        else:
+            print("Falha ao investir!")
+    else:
+        print("Empresa não encontrada!")
