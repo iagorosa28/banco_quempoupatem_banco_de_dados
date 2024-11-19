@@ -118,7 +118,7 @@ classDiagram
     TRANSFERENCIA : + time hora de recebimento
 
     class EXTRATO
-    ENTRATO : + int id
+    EXTRATO : + int id
     EXTRATO : + date data 
     EXTRATO : + time horario
     EXTRATO : + string tipo_operação
