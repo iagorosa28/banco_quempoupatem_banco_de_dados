@@ -83,19 +83,23 @@ def consultar_saldo(id_cliente):
     conta = resultadoConta.data[0]  # Pegando a primeira conta
     print(f"Saldo: {conta['saldo']}")
 
-# Realizando cálculos de débito:
-def debitando(id_cliente, valor):
-    resultado_conta = supabase.table("conta").select("tipo", "saldo").eq("id_cliente", id_cliente).execute()
+
+# Realizando cálculos de taxa:
+def taxa_calc(id_cliente, valor):
+    resultado_conta = supabase.table("conta").select("tipo").eq("id_cliente", id_cliente).execute()
     tipo_conta = resultado_conta.data[0]["tipo"]
-    saldo = float(resultado_conta.data[0]["saldo"])
-    
     taxa = 0
     if tipo_conta == "normal":
         taxa = 0.05
     elif tipo_conta == "plus":
         taxa = 0.03
+    return valor * taxa
 
-    valor_taxa = valor * taxa
+# Realizando cálculos de débito:
+def debitando(id_cliente, valor, valor_taxa):
+    resultado_conta = supabase.table("conta").select("saldo").eq("id_cliente", id_cliente).execute()
+    saldo = float(resultado_conta.data[0]["saldo"])
+
     valor_final = valor + valor_taxa
     saldo_final = saldo - valor_final
 
@@ -115,7 +119,8 @@ def debitando(id_cliente, valor):
 def debito(id_cliente):
     print()
     valor = float(input("Digite o valor do débito: "))
-    resultado = debitando(id_cliente, valor)
+    valor_taxa = taxa_calc(id_cliente, valor)
+    resultado = debitando(id_cliente, valor, valor_taxa)
     if resultado:
         print("Débito realizado com sucesso!")
     else:
