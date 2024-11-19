@@ -240,7 +240,7 @@ def investimentos(id_cliente):
         elif opcao == 2:
             comprar_cotas(id_cliente)
         elif opcao == 3:
-            print("FODA-SE")
+            vender_cotas(id_cliente)
         elif opcao == 4:
             print("FODA-SE")
         elif opcao == 5:
@@ -283,30 +283,58 @@ def listar_e():
         # Quando não tem empresa cadastrada
         print("O banco não possui empresas")  
 
-# Realizando cálculos para comprar cotas:
-def investindo(id_cliente, id_empresa, qtde):
+# Realizando cálculos para compras e vendas de cotas:
+def investindo(id_cliente, id_empresa, qtde, compraOUvenda):
     resultado_conta = supabase.table("conta").select("saldo").eq("id_cliente", id_cliente).execute()
     resultado_empresa = supabase.table("empresa").select("valor_cota").eq("id", id_empresa).execute()
+    resultado_relacao = supabase.table("investimento").select("quantidade").eq("id_cliente", id_cliente).eq("id_empresa", id_empresa).execute()
     saldo = float(resultado_conta.data[0]["saldo"])
     valor_cota = float(resultado_empresa.data[0]["valor_cota"])
 
-    valor_compra = qtde * valor_cota
-    saldo_final = saldo - valor_compra
-    valor_cota_final = valor_cota + (0.01*qtde)
-
-    resultado_saldo_final = supabase.table("conta").update({"saldo": saldo_final}).eq("id_cliente", id_cliente).execute()
-    if resultado_saldo_final.data:
-        resultado_valor_cota = supabase.table("empresa").update({"valor_cota": valor_cota_final}).eq("id", id_empresa).execute()
-        if resultado_valor_cota.data:
-            dados_investimento = {
-                "id_cliente": id_cliente,
-                "id_empresa": id_empresa,
-                "quantidade": qtde
-            }
-            resultado_investimento = supabase.table("investimento").insert(dados_investimento).execute()
-            if resultado_investimento.data:
-                return valor_compra
-    return None
+    valor_compra_venda = qtde * valor_cota
+    if compraOUvenda == "compra":
+        saldo_final = saldo - valor_compra_venda
+        valor_cota_final = valor_cota + (0.01*qtde)
+        resultado_saldo_final = supabase.table("conta").update({"saldo": saldo_final}).eq("id_cliente", id_cliente).execute()
+        if resultado_saldo_final.data:
+            resultado_valor_cota = supabase.table("empresa").update({"valor_cota": valor_cota_final}).eq("id", id_empresa).execute()
+            if resultado_valor_cota.data:
+                if resultado_relacao.data:
+                    quantidade = int(resultado_relacao.data[0]["quantidade"])
+                    qtde_final = quantidade + qtde
+                    resultado_investimento = supabase.table("investimento").update({"quantidade": qtde_final}).eq("id_cliente", id_cliente).eq("id_empresa", id_empresa).execute()
+                    if resultado_investimento.data:
+                        return valor_compra_venda
+                else:
+                    dados_investimento = {
+                        "id_cliente": id_cliente,
+                        "id_empresa": id_empresa,
+                        "quantidade": qtde
+                    }
+                    resultado_investimento = supabase.table("investimento").insert(dados_investimento).execute()
+                    if resultado_investimento.data:
+                        return valor_compra_venda
+                    
+    elif compraOUvenda == "venda":
+        if resultado_relacao.data:
+            quantidade = int(resultado_relacao.data[0]["quantidade"])
+            qtde_final = quantidade - qtde
+            if qtde_final < 0:
+                print("Quantidade de cotas inválidas!")
+                return None
+            else:
+                saldo_final = saldo + valor_compra_venda
+                valor_cota_final = valor_cota - (0.01*qtde)
+                resultado_saldo_final = supabase.table("conta").update({"saldo": saldo_final}).eq("id_cliente", id_cliente).execute()
+                if resultado_saldo_final.data:
+                    resultado_valor_cota = supabase.table("empresa").update({"valor_cota": valor_cota_final}).eq("id", id_empresa).execute()
+                    if resultado_valor_cota.data:
+                        resultado_investimento = supabase.table("investimento").update({"quantidade": qtde_final}).eq("id_cliente", id_cliente).eq("id_empresa", id_empresa).execute()
+                        if resultado_investimento.data:
+                            return valor_compra_venda
+        else:
+            print("Você não tem cotas dessa empresa para vender!")
+            return None
 
 # Comprar cotas:
 def comprar_cotas(id_cliente):
@@ -316,13 +344,32 @@ def comprar_cotas(id_cliente):
     if resultado_cnpj.data:
         id_empresa = int(resultado_cnpj.data[0]["id"])
         qtde = int(input("Digite a quantidade de cotas que deseja comprar: "))
-        valor_investimento = investindo(id_cliente, id_empresa, qtde)
-        if valor_investimento:
+        valor_investimento = investindo(id_cliente, id_empresa, qtde, "compra")
+        if valor_investimento != None:
             data = datetime.now().strftime("%Y-%m-%d")
             hora = datetime.now().strftime("%H:%M:%S")
             registra_extrato(data, hora, "compra de cota(s)", "-", valor_investimento, 0, id_cliente)
             print("Investimento realizado com sucesso!")
         else:
             print("Falha ao investir!")
+    else:
+        print("Empresa não encontrada!")
+
+# Comprar cotas:
+def vender_cotas(id_cliente):
+    print()
+    cnpj_empresa = input("Digite o CNPJ da empresa: ")
+    resultado_cnpj = supabase.table("empresa").select("id").eq("cnpj", cnpj_empresa).execute()
+    if resultado_cnpj.data:
+        id_empresa = int(resultado_cnpj.data[0]["id"])
+        qtde = int(input("Digite a quantidade de cotas que deseja vender: "))
+        valor_investimento = investindo(id_cliente, id_empresa, qtde, "venda")
+        if valor_investimento != None:
+            data = datetime.now().strftime("%Y-%m-%d")
+            hora = datetime.now().strftime("%H:%M:%S")
+            registra_extrato(data, hora, "venda de cota(s)", "+", valor_investimento, 0, id_cliente)
+            print("Resgate realizado com sucesso!")
+        else:
+            print("Falha ao resgatar!")
     else:
         print("Empresa não encontrada!")
