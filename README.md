@@ -18,67 +18,51 @@
 ```mermaid
 erDiagram
     CLIENTE {
-    %%int id
     string nome
     string CPF
     int idade
     }
 
     GERENTE {
-    %%int id 
     string nome
     string login
     string senha
     }
 
     CONTA {
-    %%int cliente_id
     string tipo
     float saldo
     string senha
-    int gerente_id
     }
 
     DEBITO {
-    %%int id
     float valor
     float taxa
-    int cliente_id
     }
 
     DEPOSITO {
-    %%int id
     float valor
-    %%int cliente_id
     }
 
     TRANSFERENCIA {
-    %%int id
-    %%int debito_id
-    %%int deposito_id
     }
 
     EXTRATO {
-    %%int id
     date data
     time hora
     string tipo_operacao
     string sinal
     float valor
     float taxa
-    %%int cliente_id
     }
 
     EMPRESA {
-    %%int id
     string nome
     string CNPJ
     float valor_cota
     }
 
     INVESTIMENTO {
-    %%int cliente_id
-    %%int empresa_id
     int quantidade
     }
 
@@ -88,11 +72,9 @@ erDiagram
     CLIENTE  || -- |{ DEPOSITO : realiza_ou_recebe
     DEBITO   || -- || TRANSFERENCIA : realiza
     DEPOSITO || -- || TRANSFERENCIA : reccebe
-    CLIENTE  || -- |{ EXTRATO : gera
-    %%CLIENTE  }| -- |{ EMPRESA : investe 
+    CLIENTE  || -- |{ EXTRATO : gera 
     CLIENTE  || -- o{ INVESTIMENTO : realiza
-    INVESTIMENTO }o -- || EMPRESA : recebe
-    %%EMPRESA || -- o{ INVESTIMENTO : recebe
+    EMPRESA || -- o{ INVESTIMENTO : recebe
 
 
  %% CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe   
