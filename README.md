@@ -144,18 +144,7 @@ classDiagram
     DEPOSITO "1" --> "1" TRANSFERENCIA : recebe
     CLIENTE "1" --> "1..*" EXTRATO : consulta
     CLIENTE "1..*" --> "0..*" INVESTIMENTO : realiza
-    EMPRESA "1..*" --> "0..*" INVESTIMENTO : recebe
-    %%INVESTIMENTO "0..*" --> "1..*" EMPRESA : recebe
-    
-    %%CLIENTE "1" --> "1..*" TRANSFERÊNCIA : faz_ou_recebe
-    
-    %%CONTA "1" --> "1..*" DÉBITO : atualiza
-    %%CONTA "1" --> "1..*" DEPÓSITO : atualiza
-    %%CONTA "1" --> "1..*" TRANSFERÊNCIA : atualiza
-    %%EXTRATO "1" --> "1..*" DÉBITO : gera_um_registro
-    %%EXTRATO "1" --> "1..*" DEPÓSITO : gera_um_registro
-    %%EXTRATO "1" --> "1..*" TRANSFERÊNCIA : gera_um_registro
-    
+    EMPRESA "1..*" --> "0..*" INVESTIMENTO : recebe 
 ```
 ## :space_invader: Como executar o código
 
