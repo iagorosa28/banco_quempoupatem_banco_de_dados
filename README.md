@@ -85,15 +85,16 @@ erDiagram
     CLIENTE  || -- || CONTA : utiliza
     GERENTE  || -- |{ CONTA : gerencia
     CLIENTE  || -- |{ DEBITO : realiza
-    CLIENTE  || -- |{ DEPOSITO : realiza
-    %%DEBITO   || -- || TRANSFERENCIA : nsei
-    %%DEPOSITO || -- || TRANSFERENCIA : nsei 
+    CLIENTE  || -- |{ DEPOSITO : realiza/recebe
+    DEBITO   || -- || TRANSFERENCIA : realiza
+    DEPOSITO || -- || TRANSFERENCIA : reccebe
     CLIENTE  || -- |{ EXTRATO : gera
     CLIENTE  }| -- |{ EMPRESA : investe 
-    CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe
+    CLIENTE  || -- o{ INVESTIMENTO : faz
+    EMPRESA || -- o{ INVESTIMENTO : recebe
 
-  %%  CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe
-   
+
+ %% CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe   
    %% CONTA || -- |{ DEBITO : atualiza
    %% CONTA || -- |{ DEPOSITO : atualiza
    %% CONTA || -- |{ TRANSFERENCIA : atualiza
