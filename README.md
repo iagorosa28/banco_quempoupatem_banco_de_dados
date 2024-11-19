@@ -214,8 +214,3 @@ classDiagram
 Iago Rosa de Oliveira R.A.: 22.224.027-7
 
 Mariah Santos Gomes R.A.: 22.224.026-8
-
-### Anotações
-- Extrato join de todos
-- Colocar as datas para todos
-- A gnt nn precisa fazer a parte de insert de update, só fazer cadastrar e as 10 operações
