@@ -65,11 +65,11 @@ def menu_c(id_cliente):
         elif opcao == 3:
             deposito(id_cliente)
         elif opcao == 4:
-            transferencia()
+            transferencia(id_cliente)
         elif opcao == 5:
-            extrato()
+            extrato(id_cliente)
         elif opcao == 6:
-            investimentos()
+            investimentos(id_cliente)
         elif opcao == 7:
             print("Tchau!")
             break
@@ -156,19 +156,47 @@ def deposito(id_cliente):
         print("Erro ao realizar o depósito!")
 
 # Transferência:
-def transferencia():
+def transferencia(id_cliente):
     print()
-    # Implementar aqui (Iago).
-    print("Transferência")
+    cpf_destino = input("Digite o CPF do destino: ")
+    # Verifica a existência da conta destino:
+    resultado_cpf = supabase.table("cliente").select("id").eq("cpf", cpf_destino).execute()
+    if resultado_cpf.data:
+        # Pega o ID da conta destino:
+        id_destino = int(resultado_cpf.data[0]["id"])
+        valor = float(input("Digite o valor da transferência: "))
+        valor_taxa = taxa_calc(id_cliente, valor)
+        # Realiza o débito da conta origem:
+        resultado_debito = debitando(id_cliente, valor, valor_taxa)
+        if resultado_debito:
+            # Realiza o depósito na conta destino:
+            resultado_deposito = depositando(id_destino, valor)
+            if resultado_deposito:
+                dados_transferencia = {
+                    "id_debito": resultado_debito,
+                    "id_deposito": resultado_deposito
+                }
+                # Junta os IDs de débito e depóstio das contas origem e destino para registrar uma transferência:
+                resultado_transferencia = supabase.table("transferencia").insert(dados_transferencia).execute()
+                if resultado_transferencia.data:
+                    print("Transferência realizada com sucesso!")
+                else:
+                    print("Erro ao realizar a transferência")
+            else:
+                print("Erro ao depositar valor na conta destino!")
+        else:
+            print("Erro ao debitar valor da conta origem!")
+    else:
+        print("Conta destino não encontrada!")
 
 # Extrato:
-def extrato():
+def extrato(id_cliente):
     print()
     # Implementar aqui (Mariah).
     print("Extrato")
 
 # Investimentos:
-def investimentos():
+def investimentos(id_cliente):
     print()
     # Implementar aqui (Iago).
     print("Investimentos")
