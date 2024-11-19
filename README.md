@@ -88,8 +88,8 @@ erDiagram
     CLIENTE  || -- |{ DEPOSITO : realiza
     %%DEBITO   || -- || TRANSFERENCIA : nsei
     %%DEPOSITO || -- || TRANSFERENCIA : nsei 
-    CLIENTE  || -- |{ EXTRATO : nsei
-    CLIENTE  }| -- |{ EMPRESA : nsei 
+    CLIENTE  || -- |{ EXTRATO : gera
+    CLIENTE  }| -- |{ EMPRESA : investe 
 
   %%  CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe
    %% CLIENTE || -- |{ EXTRATO : consulta
