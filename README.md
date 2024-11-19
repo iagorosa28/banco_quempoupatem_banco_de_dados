@@ -86,10 +86,10 @@ erDiagram
     GERENTE  || -- |{ CONTA : gerencia
     CLIENTE  || -- |{ DEBITO : realiza
     CLIENTE  || -- |{ DEPOSITO : realiza
-    DEBITO   || -- || TRANSFERENCIA : 
-    DEPOSITO || -- || TRANSFERENCIA : 
-    CLIENTE  || -- |{ EXTRATO :
-    CLIENTE  }| -- |{ EMPRESA : 
+    DEBITO   || -- || TRANSFERENCIA : nsei
+    DEPOSITO || -- || TRANSFERENCIA : nsei 
+    CLIENTE  || -- |{ EXTRATO : nsei
+    CLIENTE  }| -- |{ EMPRESA : nsei 
 
   %%  CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe
    %% CLIENTE || -- |{ EXTRATO : consulta
