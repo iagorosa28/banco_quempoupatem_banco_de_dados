@@ -1,9 +1,6 @@
 from config_supabase import supabase
 from datetime import datetime
 
-data = datetime.now().strftime("%Y-%m-%d")
-hora = datetime.now().strftime("%H:%M:%S")
-
 # Login do cliente:
 def login_c():
     print()
@@ -122,6 +119,9 @@ def debito(id_cliente):
     valor_taxa = taxa_calc(id_cliente, valor)
     resultado = debitando(id_cliente, valor, valor_taxa)
     if resultado:
+        data = datetime.now().strftime("%Y-%m-%d")
+        hora = datetime.now().strftime("%H:%M:%S")
+        registra_extrato(data, hora, "débito", "-", valor, valor_taxa, id_cliente)
         print("Débito realizado com sucesso!")
     else:
         print("Erro ao realizar o débito!")
@@ -151,6 +151,9 @@ def deposito(id_cliente):
     valor = float(input("Digite o valor do depósito: "))
     resultado = depositando(id_cliente, valor)
     if resultado:
+        data = datetime.now().strftime("%Y-%m-%d")
+        hora = datetime.now().strftime("%H:%M:%S")
+        registra_extrato(data, hora, "depósito", "+", valor, 0, id_cliente)
         print("Depósito realizado com sucesso!")
     else:
         print("Erro ao realizar o depósito!")
@@ -179,6 +182,10 @@ def transferencia(id_cliente):
                 # Junta os IDs de débito e depóstio das contas origem e destino para registrar uma transferência:
                 resultado_transferencia = supabase.table("transferencia").insert(dados_transferencia).execute()
                 if resultado_transferencia.data:
+                    data = datetime.now().strftime("%Y-%m-%d")
+                    hora = datetime.now().strftime("%H:%M:%S")
+                    registra_extrato(data, hora, "transferência", "-", valor, valor_taxa, id_cliente)
+                    registra_extrato(data, hora, "transferência", "+", valor, 0, id_destino)
                     print("Transferência realizada com sucesso!")
                 else:
                     print("Erro ao realizar a transferência")
@@ -188,6 +195,20 @@ def transferencia(id_cliente):
             print("Erro ao debitar valor da conta origem!")
     else:
         print("Conta destino não encontrada!")
+
+
+# Realiza registros de extrato:
+def registra_extrato(data, hora, tipo_operacao, sinal, valor, taxa, id_cliente):
+    dados_registro = {
+        "data": data,
+        "hora": hora,
+        "tipo_operacao": tipo_operacao,
+        "sinal": sinal,
+        "valor": valor,
+        "taxa": taxa,
+        "id_cliente": id_cliente
+    }
+    resultado_registro = supabase.table("extrato").insert(dados_registro).execute()
 
 # Extrato:
 def extrato(id_cliente):

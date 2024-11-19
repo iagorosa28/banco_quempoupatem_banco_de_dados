@@ -1,4 +1,6 @@
 from config_supabase import supabase
+from datetime import datetime
+from cliente import registra_extrato
 
 # Loop inicial dos gerentes (antes deles "logarem"):
 def menu_acesso_g():
@@ -187,6 +189,9 @@ def criar_conta_c(id_gerente):
                 resultado_conta = supabase.table("conta").insert(dados_conta).execute()
                 # Verifica se os dados foram inseridos com sucesso:
                 if resultado_conta.data:
+                    data = datetime.now().strftime("%Y-%m-%d")
+                    hora = datetime.now().strftime("%H:%M:%S")
+                    registra_extrato(data, hora, "depósito inicial", "+", saldo, 0, id_cliente)
                     print("Conta do cliente criada com sucesso!")
                 else:
                     print("Erro ao cadastrar conta: ", resultado_conta.error)    
