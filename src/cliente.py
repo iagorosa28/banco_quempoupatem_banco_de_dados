@@ -242,7 +242,7 @@ def investimentos(id_cliente):
         elif opcao == 3:
             vender_cotas(id_cliente)
         elif opcao == 4:
-            print("FODA-SE")
+            meus_investimentos(id_cliente)
         elif opcao == 5:
             print("Tchau!")
             break
@@ -373,3 +373,32 @@ def vender_cotas(id_cliente):
             print("Falha ao resgatar!")
     else:
         print("Empresa não encontrada!")
+
+# Meus investimentos:
+def meus_investimentos(id_cliente):
+    print()
+    # Obtém todos os investimentos do cliente
+    resultado_investimentos = supabase.table("investimento").select("*").eq("id_cliente", id_cliente).execute()
+    
+    if resultado_investimentos.data:
+        print("-" * 15)
+        for investimento in resultado_investimentos.data:
+            id_empresa = investimento["id_empresa"]  # Pega o ID da empresa do investimento atual
+            qtde = investimento["quantidade"]       # Pega a quantidade de cotas
+            
+            # Busca as informações da empresa relacionada ao investimento
+            resultado_empresa = supabase.table("empresa").select("*").eq("id", id_empresa).execute()
+            
+            if resultado_empresa.data:  # Verifica se os dados da empresa foram encontrados
+                nome_empresa = resultado_empresa.data[0]["nome"]
+                cnpj_empresa = resultado_empresa.data[0]["cnpj"]
+                valor_cota_empresa = resultado_empresa.data[0]["valor_cota"]
+                
+                # Exibe as informações do investimento
+                print(f"Nome: {nome_empresa}, CNPJ: {cnpj_empresa}, Valor da cota: {valor_cota_empresa}, Quantidade de cotas: {qtde}")
+            else:
+                print(f"Empresa com ID {id_empresa} não encontrada.")
+        
+        print("-" * 15)
+    else:
+        print("Você não tem nenhum investimento!")
