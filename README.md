@@ -18,21 +18,21 @@
 ```mermaid
 erDiagram
     CLIENTE {
-    int id
+    %%int id
     string nome
     string CPF
     int idade
     }
 
     GERENTE {
-    int id 
+    %%int id 
     string nome
     string login
     string senha
     }
 
     CONTA {
-    int cliente_id
+    %%int cliente_id
     string tipo
     float saldo
     string senha
@@ -40,45 +40,45 @@ erDiagram
     }
 
     DEBITO {
-    int id
+    %%int id
     float valor
     float taxa
     int cliente_id
     }
 
     DEPOSITO {
-    int id
+    %%int id
     float valor
-    int cliente_id
+    %%int cliente_id
     }
 
-    TRANSFERENCIA {
-    int id
-    int debito_id
-    int deposito_id
-    }
+    %%TRANSFERENCIA {
+    %%int id
+    %%int debito_id
+    %%int deposito_id
+    %%}
 
     EXTRATO {
-    int id
+    %%int id
     date data
     time hora
     string tipo_operacao
     string sinal
     float valor
     float taxa
-    int cliente_id
+    %%int cliente_id
     }
 
     EMPRESA {
-    int id
+    %%int id
     string nome
     string CNPJ
     float valor_cota
     }
 
     INVESTIMENTO {
-    int cliente_id
-    int empresa_id
+    %%int cliente_id
+    %%int empresa_id
     int quantidade
     }
 
@@ -86,8 +86,8 @@ erDiagram
     GERENTE  || -- |{ CONTA : gerencia
     CLIENTE  || -- |{ DEBITO : realiza
     CLIENTE  || -- |{ DEPOSITO : realiza
-    DEBITO   || -- || TRANSFERENCIA : nsei
-    DEPOSITO || -- || TRANSFERENCIA : nsei 
+    %%DEBITO   || -- || TRANSFERENCIA : nsei
+    %%DEPOSITO || -- || TRANSFERENCIA : nsei 
     CLIENTE  || -- |{ EXTRATO : nsei
     CLIENTE  }| -- |{ EMPRESA : nsei 
 
