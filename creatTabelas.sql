@@ -19,7 +19,7 @@ CREATE TABLE conta (
   tipo VARCHAR NOT NULL,
   saldo FLOAT NOT NULL,
   senha VARCHAR NOT NULL,
-  id_gerente INT NOT NULL REFERENCES gerente(id),
+  id_gerente INT REFERENCES gerente(id) ON DELETE SET NULL,
   PRIMARY KEY (id_cliente) 
 );
 
@@ -28,14 +28,14 @@ CREATE TABLE debito(
   id INT PRIMARY KEY DEFAULT nextval('debito_id_seq'),
   valor FLOAT NOT NULL,
   taxa FLOAT NOT NULL,
-  id_cliente INT NOT NULL REFERENCES cliente(id)
+  id_cliente INT NOT NULL REFERENCES cliente(id) ON DELETE CASCADE
 );
 
 CREATE SEQUENCE deposito_id_seq;
 CREATE TABLE deposito(
   id INT PRIMARY KEY DEFAULT nextval('deposito_id_seq'),
   valor FLOAT NOT NULL,
-  id_cliente INT NOT NULL REFERENCES cliente(id)
+  id_cliente INT NOT NULL REFERENCES cliente(id) ON DELETE CASCADE
 );
 
 CREATE SEQUENCE transferencia_id_seq;
@@ -54,7 +54,7 @@ CREATE TABLE extrato(
   sinal VARCHAR NOT NULL,
   valor FLOAT NOT NULL,
   taxa FLOAT NOT NULL,
-  id_cliente INT NOT NULL REFERENCES cliente(id)
+  id_cliente INT NOT NULL REFERENCES cliente(id) ON DELETE CASCADE
 )
 
 CREATE SEQUENCE empresa_id_seq;
@@ -66,8 +66,8 @@ CREATE TABLE empresa (
 );
 
 CREATE TABLE investimento (
-  id_cliente INT NOT NULL REFERENCES cliente(id),
-  id_empresa INT NOT NULL REFERENCES empresa(id),
+  id_cliente INT NOT NULL REFERENCES cliente(id) ON DELETE CASCADE,
+  id_empresa INT NOT NULL REFERENCES empresa(id) ON DELETE CASCADE,
   quantidade INT NOT NULL,
   PRIMARY KEY (id_cliente, id_empresa) 
 )
