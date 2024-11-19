@@ -41,8 +41,8 @@ CREATE TABLE deposito(
 CREATE SEQUENCE transferencia_id_seq;
 CREATE TABLE transferencia(
   id INT PRIMARY KEY DEFAULT nextval('transferencia_id_seq'),
-  id_debito INT NOT NULL UNIQUE REFERENCES debito(id) ON DELETE CASCADE,
-  id_deposito INT NOT NULL UNIQUE REFERENCES deposito(id) ON DELETE CASCADE
+  id_debito INT UNIQUE REFERENCES debito(id) ON DELETE SET NULL,
+  id_deposito INT UNIQUE REFERENCES deposito(id) ON DELETE SET NULL
 );
 
 CREATE SEQUENCE extrato_id_seq;
