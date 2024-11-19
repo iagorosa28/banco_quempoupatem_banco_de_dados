@@ -49,7 +49,17 @@ CREATE TABLE transferencia(
   id_deposito INT NOT NULL UNIQUE REFERENCES deposito(id) ON DELETE CASCADE
 );
 
---EXTRATO
+CREATE SEQUENCE extrato_id_seq;
+CREATE TABLE extrato(
+  id INT PRIMARY KEY DEFAULT nextval('extrato_id_seq'),
+  data DATE NOT NULL,
+  hora TIME NOT NULL,
+  tipo_operacao VARCHAR NOT NULL,
+  sinal VARCHAR NOT NULL,
+  valor FLOAT NOT NULL,
+  taxa FLOAT NOT NULL,
+  id_cliente INT NOT NULL REFERENCES cliente(id)
+)
 
 CREATE SEQUENCE empresa_id_seq;
 CREATE TABLE empresa (
