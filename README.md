@@ -18,89 +18,63 @@
 ```mermaid
 erDiagram
     CLIENTE {
-    int id
     string nome
     string CPF
     int idade
     }
 
     GERENTE {
-    int id 
     string nome
     string login
     string senha
     }
 
     CONTA {
-    int cliente_id
     string tipo
     float saldo
     string senha
-    int gerente_id
     }
 
     DEBITO {
-    int id
     float valor
     float taxa
-    int cliente_id
     }
 
     DEPOSITO {
-    int id
     float valor
-    int cliente_id
     }
 
     TRANSFERENCIA {
-    int id
-    int debito_id
-    int deposito_id
     }
 
     EXTRATO {
-    int id
     date data
     time hora
     string tipo_operacao
     string sinal
     float valor
     float taxa
-    int cliente_id
     }
 
     EMPRESA {
-    int id
     string nome
     string CNPJ
     float valor_cota
     }
 
     INVESTIMENTO {
-    int cliente_id
-    int empresa_id
     int quantidade
     }
 
     CLIENTE  || -- || CONTA : utiliza
     GERENTE  || -- |{ CONTA : gerencia
     CLIENTE  || -- |{ DEBITO : realiza
-    CLIENTE  || -- |{ DEPOSITO : realiza
-    DEBITO   || -- || TRANSFERENCIA : nsei
-    DEPOSITO || -- || TRANSFERENCIA : nsei 
-    CLIENTE  || -- |{ EXTRATO : nsei
-    CLIENTE  }| -- |{ EMPRESA : nsei 
-
-  %%  CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe
-   %% CLIENTE || -- |{ EXTRATO : consulta
-   %% CONTA || -- |{ DEBITO : atualiza
-   %% CONTA || -- |{ DEPOSITO : atualiza
-   %% CONTA || -- |{ TRANSFERENCIA : atualiza
-   %% EXTRATO || -- |{ DEBITO : gera_um_registro
-    %% EXTRATO || -- |{ DEPOSITO : gera_um_registro
-   %% EXTRATO || -- |{ TRANSFERENCIA : gera_um_registro
-    
-
+    CLIENTE  || -- |{ DEPOSITO : realiza_ou_recebe
+    DEBITO   || -- || TRANSFERENCIA : realiza
+    DEPOSITO || -- || TRANSFERENCIA : reccebe
+    CLIENTE  || -- |{ EXTRATO : gera 
+    CLIENTE  || -- o{ INVESTIMENTO : realiza
+    EMPRESA || -- o{ INVESTIMENTO : recebe
 ```
 ### Modelo Relacional na 3FN
 ```mermaid
@@ -175,6 +149,4 @@ Mariah Santos Gomes R.A.: 22.224.026-8
 ### Anotações
 - Extrato join de todos
 - Colocar as datas para todos
-- Programar direto com banco de dados
-- Usar supabase
 - A gnt nn precisa fazer a parte de insert de update, só fazer cadastrar e as 10 operações
