@@ -28,8 +28,6 @@ CREATE TABLE debito(
   id INT PRIMARY KEY DEFAULT nextval('debito_id_seq'),
   valor FLOAT NOT NULL,
   taxa FLOAT NOT NULL,
-  data DATE NOT NULL,
-  hora TIME NOT NULL,
   id_cliente INT NOT NULL REFERENCES cliente(id)
 );
 
@@ -37,8 +35,6 @@ CREATE SEQUENCE deposito_id_seq;
 CREATE TABLE deposito(
   id INT PRIMARY KEY DEFAULT nextval('deposito_id_seq'),
   valor FLOAT NOT NULL,
-  data DATE NOT NULL,
-  hora TIME NOT NULL,
   id_cliente INT NOT NULL REFERENCES cliente(id)
 );
 
