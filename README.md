@@ -18,7 +18,7 @@
 ```mermaid
 erDiagram
     CLIENTE {
-    id int
+    int id
     string nome
     string CPF
     int idade
@@ -40,47 +40,66 @@ erDiagram
     }
 
     DEBITO {
+    int id
     float valor
     float taxa
-    date dataDePagamento
-    time horaDePagamento
+    int cliente_id
     }
 
     DEPOSITO {
+    int id
     float valor
-    date dataDeRecebimento
-    time horaDeRecebimento
+    int cliente_id
     }
 
     TRANSFERENCIA {
-    float taxa
-    float valor
-    date dataDePagamento
-    time horaDePagamento
-    date dataDeRecebimento
-    time horaDeRecebimento
+    int id
+    int debito_id
+    int deposito_id
     }
 
     EXTRATO {
-    float taxa
+    int id
+    date data
+    time hora
+    string tipo_operacao
+    string sinal
     float valor
-    string tipoDaOperacao 
-    date dataDaOperacao
-    time horarioDaOperacao
+    float taxa
+    int cliente_id
     }
 
-    CLIENTE || -- || CONTA : utiliza
-    CLIENTE || -- |{ DEBITO : realiza
-    CLIENTE || -- |{ DEPOSITO : realiza
-    CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe
-    CLIENTE || -- |{ EXTRATO : consulta
-    CONTA || -- |{ DEBITO : atualiza
-    CONTA || -- |{ DEPOSITO : atualiza
-    CONTA || -- |{ TRANSFERENCIA : atualiza
-    EXTRATO || -- |{ DEBITO : gera_um_registro
-    EXTRATO || -- |{ DEPOSITO : gera_um_registro
-    EXTRATO || -- |{ TRANSFERENCIA : gera_um_registro
-    GERENTE }| -- || CONTA : gerencia
+    EMPRESA {
+    int id
+    string nome
+    string CNPJ
+    float valor_cota
+    }
+
+    INVESTIMENTO {
+    int cliente_id
+    int empresa_id
+    int quantidade
+    }
+
+    CLIENTE  || -- || CONTA : utiliza
+    GERENTE  || -- |{ CONTA : gerencia
+    CLIENTE  || -- |{ DEBITO : realiza
+    CLIENTE  || -- |{ DEPOSITO : realiza
+    DEBITO   || -- || TRANSFERENCIA : 
+    DEPOSITO || -- || TRANSFERENCIA : 
+    CLIENTE  || -- |{ EXTRATO :
+    CLIENTE  }| -- |{ EMPRESA : 
+
+  %%  CLIENTE || -- |{ TRANSFERENCIA : faz_ou_recebe
+   %% CLIENTE || -- |{ EXTRATO : consulta
+   %% CONTA || -- |{ DEBITO : atualiza
+   %% CONTA || -- |{ DEPOSITO : atualiza
+   %% CONTA || -- |{ TRANSFERENCIA : atualiza
+   %% EXTRATO || -- |{ DEBITO : gera_um_registro
+    %% EXTRATO || -- |{ DEPOSITO : gera_um_registro
+   %% EXTRATO || -- |{ TRANSFERENCIA : gera_um_registro
+    
 
 ```
 ### Modelo Relacional na 3FN
