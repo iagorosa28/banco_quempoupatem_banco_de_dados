@@ -161,7 +161,7 @@ classDiagram
 **1ºPASSO:** Ao rodar o arquivo `main.py` deverá aparecer no seu terminal a mensagem da foto abaixo. Logo, que ela aparecer você deverá escolher uma opção.
 
 <div align="center">
-   <img width=300 height=150 src="https://github.com/user-attachments/assets/f0e9646f-71f6-4fdf-9f23-5df7a716d98c"/>
+   <img width=200 height=150 src="https://github.com/user-attachments/assets/f0e9646f-71f6-4fdf-9f23-5df7a716d98c"/>
 </div>
 
 **2ºPASSO:**
