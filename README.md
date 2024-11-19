@@ -109,13 +109,13 @@ classDiagram
     DEPOSITO : + float valor
     DEPOSITO : + int cliente_id
 
-    class TRANSFERÊNCIA
-    TRANSFERÊNCIA : + float taxa
-    TRANSFERÊNCIA : + float valor
-    TRANSFERÊNCIA : + date data de pagamento
-    TRANSFERÊNCIA : + time hora de pagamento
-    TRANSFERÊNCIA : + date data de recebimento
-    TRANSFERÊNCIA : + time hora de recebimento
+    class TRANSFERENCIA
+    TRANSFERENCIA : + float taxa
+    TRANSFERENCIA : + float valor
+    TRANSFERENCIA : + date data de pagamento
+    TRANSFERENCIA : + time hora de pagamento
+    TRANSFERENCIA : + date data de recebimento
+    TRANSFERENCIA : + time hora de recebimento
 
     class EXTRATO
     ENTRATO : + int id
