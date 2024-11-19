@@ -90,7 +90,7 @@ erDiagram
     DEPOSITO || -- || TRANSFERENCIA : reccebe
     CLIENTE  || -- |{ EXTRATO : gera
     CLIENTE  }| -- |{ EMPRESA : investe 
-    CLIENTE  || -- o{ INVESTIMENTO : faz
+    CLIENTE  || -- o{ INVESTIMENTO : realiza
     EMPRESA || -- o{ INVESTIMENTO : recebe
 
 
