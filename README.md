@@ -81,59 +81,59 @@ erDiagram
 ```mermaid
 classDiagram
     class CLIENTE
-    CLIENTE : + int id
+    CLIENTE : + int id PK
     CLIENTE : + string nome
-    CLIENTE : + int CPF
+    CLIENTE : + int CPF UNIQUE
     CLIENTE : + int idade
 
     class GERENTE
-    GERENTE : + int id
+    GERENTE : + int id PK
     GERENTE : + string nome
-    GERENTE : + string login
+    GERENTE : + string login UNIQUE
     GERENTE : + string senha
 
     class CONTA
-    CONTA : + int cliente_id
+    CONTA : + int cliente_id PK, FK
     CONTA : + string tipo
     CONTA : + float saldo
     CONTA : + string senha
-    CONTA : + int gerente_id
+    CONTA : + int gerente_id FK
 
     class DEBITO
-    DEBITO : + int id
+    DEBITO : + int id PK
     DEBITO : + float valor
     DEBITO : + float taxa
-    DEBITO : + int cliente_id
+    DEBITO : + int cliente_id FK
 
     class DEPOSITO
-    DEPOSITO : + int id
+    DEPOSITO : + int id PK
     DEPOSITO : + float valor
-    DEPOSITO : + int cliente_id
+    DEPOSITO : + int cliente_id FK
 
     class TRANSFERENCIA
-    TRANSFERENCIA : + int id
-    TRANSFERENCIA : + int id_debito
-    TRANSFERENCIA : + int id_deposito
+    TRANSFERENCIA : + int id PK
+    TRANSFERENCIA : + int id_debito FK, UNIQUE
+    TRANSFERENCIA : + int id_deposito FK, UNIQUE
 
     class EXTRATO
-    EXTRATO : + int id
+    EXTRATO : + int id PK
     EXTRATO : + date data 
     EXTRATO : + time horario
     EXTRATO : + string tipo_operação
     EXTRATO : + string sinal
     EXTRATO : + float taxa
     EXTRATO : + float valor
-    EXTRATO : + int cliente_id
+    EXTRATO : + int cliente_id FK
     
     class EMPRESA
-    EMPRESA : + int id
+    EMPRESA : + int id PK
     EMPRESA : + string nome
-    EMPRESA : + string CNPJ
+    EMPRESA : + string CNPJ UNIQUE
     EMPRESA : + float valor_cota
 
     class INVESTIMENTO
-    INVESTIMENTO : int cliente_id
-    INVESTIMENTO : int empresa_id
+    INVESTIMENTO : int cliente_id FK, PK
+    INVESTIMENTO : int empresa_id FK, PK
     INVESTIMENTO : int quantidade
 
     CLIENTE "1" --> "1" CONTA : utiliza
